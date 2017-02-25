@@ -12,8 +12,11 @@ class DictionaryController extends Controller
     {
         $em    = $this->getDoctrine()->getManager();
 
-        $query = $em->createQueryBuilder('a')
-            ->where('a.title LIKE :title AND a.status = 1')
+        $query = $em->createQueryBuilder()
+            ->select('a')
+            ->from('AppBundle:Node','a')
+            ->where('a.title LIKE :title')
+            ->andWhere('a.status = 1')
             ->setParameter('title', $letter.'%')
             ->getQuery();
 
@@ -21,9 +24,9 @@ class DictionaryController extends Controller
         $pagination = $paginator->paginate(
             $query, /* query NOT result */
             $page, /*page number*/
-            20/*limit per page*/
+            80/*limit per page*/
         );
-        return $this->render('dictionary/list.nodes', array(
+        return $this->render('dictionary/list.nodes.html.twig', array(
             'pagination' => $pagination,
             'letter' => $letter,
         ));
@@ -44,10 +47,11 @@ class DictionaryController extends Controller
 
         $definitions = $em->getRepository('AppBundle:Definition')->relatedDefinitions($node->getId());
 
-        return $this->render('dictionary/single.node', array(
+        return $this->render('dictionary/single.node.html.twig', array(
             'node' => $node,
             'definitions' => $definitions,
         ));
+
     }
 
     public function vote_nodeAction($id,$action)

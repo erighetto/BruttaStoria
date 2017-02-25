@@ -4,6 +4,8 @@
 namespace AppBundle\Repository;
 
 use Doctrine\ORM\EntityRepository;
+use Doctrine\ORM\Query\Expr\Join;
+use Doctrine\ORM\Query;
 
 /**
  * Class NodeRepository
@@ -15,30 +17,39 @@ class NodeRepository extends EntityRepository
     function topTenSticked() {
 
         $em =  $this->getEntityManager();
-        $em->createQuery('SELECT n.title, n.slug, d.body
-		FROM AppBundle:Node n
-		JOIN AppBundle:Definition d ON (d.nodeId = n.id AND d.status = 1)
-		WHERE (n.status = 1) AND (n.sticky = :sticky)
-		ORDER BY n.updated DESC')
+        $qb =  $em->createQueryBuilder();
+        $qb->select(array('n', 'd'))
+            ->from('AppBundle:Node', 'n')
+            ->innerJoin('AppBundle:Definition','d', Join::WITH, 'd.nodeId = n.id AND d.status = 1')
+            ->where('n.status = 1')
+            ->andWhere('n.sticky = :sticky')
+            ->orderBy('n.updated', 'DESC')
             ->setParameter('sticky', 1)
             ->setFirstResult( 0 )
             ->setMaxResults( 10 );
+        $query = $qb->getQuery();
+        $results = $query->getResult(Query::HYDRATE_SCALAR);
 
-        return $em->getResult();
+        return $results;
 
     }
 
     function topTenPromoted() {
+
         $em =  $this->getEntityManager();
-        $em->createQuery('SELECT n.title, n.slug, d.body
-		FROM AppBundle:Node n
-		JOIN AppBundle:Definition d ON (d.nodeId = n.id AND d.status = 1)
-		WHERE (n.status = 1) AND (n.promoted = :promoted)
-		ORDER BY n.updated DESC')
+        $qb =  $em->createQueryBuilder();
+        $qb->select(array('n', 'd'))
+            ->from('AppBundle:Node', 'n')
+            ->innerJoin('AppBundle:Definition','d', Join::WITH, 'd.nodeId = n.id AND d.status = 1')
+            ->where('n.status = 1')
+            ->andWhere('n.promote = :promoted')
+            ->orderBy('n.updated', 'DESC')
             ->setParameter('promoted', 1)
             ->setFirstResult( 0 )
             ->setMaxResults( 10 );
+        $query = $qb->getQuery();
+        $results = $query->getResult(Query::HYDRATE_SCALAR);
 
-        return $em->getResult();
+        return $results;
     }
 }

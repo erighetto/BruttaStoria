@@ -5,9 +5,9 @@
     <div class="panel-body">
         <a href="dictionary/random">random</a>
         {% for i in 'a'|upper..'z'|upper %}
-            <a href="dictionary/letter/{{ i }}">{{ i }}</a>
+            <a href="{{ path('list_nodes', { 'letter': i, 'page': 1 }) }}">{{ i }}</a>
         {% endfor %}
-        <a href="dictionary/letter/%2A">#</a>
+        <a href="{{ path('list_nodes', { 'letter': '%2A', 'page': 1 }) }}">#</a>
         <a href="dictionary/yesterday">new</a>
     </div>
 </div>

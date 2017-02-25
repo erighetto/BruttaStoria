@@ -14,7 +14,7 @@ class DefaultController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
         $sticked = $em->getRepository('AppBundle:Node')->topTenSticked();
-        $promoted = $em->getRepository('AppBundle:Node')->topTenSticked();
+        $promoted = $em->getRepository('AppBundle:Node')->topTenPromoted();
 
         return $this->render('default/index.html.twig', [
             'sticked_nodes'=> $sticked,

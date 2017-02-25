@@ -1,7 +1,23 @@
 {% extends "base.html.twig" %}
 
-{% block title %}AppBundle:Dictionary:list_nodes{% endblock %}
+{% block title %}Figate che iniziano con la {{ letter }}{% endblock %}
 
 {% block body %}
-<h1>Welcome to the Dictionary:list_nodes page</h1>
+<h1>Figate che iniziano con la {{ letter }}</h1>
+
+
+    {% for row in pagination|batch(4) %}
+            <div class="row node-container">
+                {% for column in row %}
+                    <div class="col-md-3 node-container__item">
+                        <a href="{{ path('single_node', { 'slug': column.slug }) }}">{{ column.title }}</a>
+                    </div>
+                {% endfor %}
+            </div>
+        {% endfor %}
+
+    {# display navigation #}
+    <div class="navigation">
+        {{ knp_pagination_render(pagination) }}
+    </div>
 {% endblock %}
