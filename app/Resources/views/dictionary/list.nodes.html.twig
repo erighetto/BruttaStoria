@@ -3,7 +3,7 @@
 {% block title %}Figate che iniziano con la {{ letter }}{% endblock %}
 
 {% block body %}
-<h1>Figate che iniziano con la {{ letter }}</h1>
+<h1>Figate che iniziano con {{ letter }}</h1>
 
 
     {% for row in pagination|batch(4) %}

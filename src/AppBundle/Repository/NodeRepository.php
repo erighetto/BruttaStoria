@@ -1,6 +1,5 @@
 <?php
 
-
 namespace AppBundle\Repository;
 
 use Doctrine\ORM\EntityRepository;
@@ -14,6 +13,9 @@ use Doctrine\ORM\Query;
 class NodeRepository extends EntityRepository
 {
 
+    /**
+     * @return array
+     */
     function topTenSticked() {
 
         $em =  $this->getEntityManager();
@@ -34,6 +36,9 @@ class NodeRepository extends EntityRepository
 
     }
 
+    /**
+     * @return array
+     */
     function topTenPromoted() {
 
         $em =  $this->getEntityManager();

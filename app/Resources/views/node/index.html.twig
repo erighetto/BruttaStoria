@@ -3,7 +3,7 @@
 {% block body %}
     <h1>Nodes list</h1>
 
-    <table>
+    <table class="table">
         <thead>
             <tr>
                 <th>Id</th>
@@ -29,7 +29,7 @@
                 <td>{% if node.updated %}{{ node.updated|date('Y-m-d H:i:s') }}{% endif %}</td>
                 <td>{% if node.created %}{{ node.created|date('Y-m-d H:i:s') }}{% endif %}</td>
                 <td>
-                    <ul>
+                    <ul class="list-inline">
                         <li>
                             <a href="{{ path('node_show', { 'id': node.id }) }}">show</a>
                         </li>
@@ -48,9 +48,9 @@
         {{ knp_pagination_render(nodes) }}
     </div>
 
-    <ul>
+    <ul class="list-inline">
         <li>
-            <a href="{{ path('node_new') }}">Create a new node</a>
+            <a href="{{ path('node_new') }}" class="btn btn-success">Create a new node</a>
         </li>
     </ul>
 {% endblock %}

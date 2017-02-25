@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: user
- * Date: 25/02/17
- * Time: 10:18
- */
 
 namespace AppBundle\Repository;
 
@@ -13,9 +7,17 @@ use Doctrine\ORM\Query\Expr\Join;
 use Doctrine\ORM\Query;
 
 
+/**
+ * Class DefinitionRepository
+ * @package AppBundle\Repository
+ */
 class DefinitionRepository extends EntityRepository
 {
 
+    /**
+     * @param $node_id
+     * @return array
+     */
     function relatedDefinitions($node_id) {
 
         $em =  $this->getEntityManager();

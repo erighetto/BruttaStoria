@@ -3,7 +3,7 @@
 {% block body %}
     <h1>Definitions list</h1>
 
-    <table>
+    <table class="table">
         <thead>
             <tr>
                 <th>Id</th>
@@ -29,7 +29,7 @@
                 <td>{% if definition.updated %}{{ definition.updated|date('Y-m-d H:i:s') }}{% endif %}</td>
                 <td>{% if definition.created %}{{ definition.created|date('Y-m-d H:i:s') }}{% endif %}</td>
                 <td>
-                    <ul>
+                    <ul class="list-inline">
                         <li>
                             <a href="{{ path('definition_show', { 'id': definition.id }) }}">show</a>
                         </li>
@@ -43,9 +43,13 @@
         </tbody>
     </table>
 
-    <ul>
+    <div class="navigation">
+        {{ knp_pagination_render(definitions) }}
+    </div>
+
+    <ul class="list-inline">
         <li>
-            <a href="{{ path('definition_new') }}">Create a new definition</a>
+            <a href="{{ path('definition_new') }}" class="btn btn-success">Create a new definition</a>
         </li>
     </ul>
 {% endblock %}

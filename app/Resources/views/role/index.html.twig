@@ -3,7 +3,7 @@
 {% block body %}
     <h1>Roles list</h1>
 
-    <table>
+    <table class="table">
         <thead>
             <tr>
                 <th>Id</th>
@@ -19,7 +19,7 @@
                 <td>{{ role.role }}</td>
                 <td>{% if role.isAdmin %}Yes{% else %}No{% endif %}</td>
                 <td>
-                    <ul>
+                    <ul class="list-inline">
                         <li>
                             <a href="{{ path('role_show', { 'id': role.id }) }}">show</a>
                         </li>
@@ -33,9 +33,9 @@
         </tbody>
     </table>
 
-    <ul>
+    <ul class="list-inline">
         <li>
-            <a href="{{ path('role_new') }}">Create a new role</a>
+            <a href="{{ path('role_new') }}" class="btn btn-success">Create a new role</a>
         </li>
     </ul>
 {% endblock %}

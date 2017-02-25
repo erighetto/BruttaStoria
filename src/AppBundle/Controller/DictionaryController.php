@@ -32,6 +32,30 @@ class DictionaryController extends Controller
         ));
     }
 
+    public function list_bysymbol_nodesAction($page)
+    {
+        $em    = $this->getDoctrine()->getManager();
+
+        $query = $em->createQueryBuilder()
+            ->select('a')
+            ->from('AppBundle:Node','a')
+            ->where('REGEXP(a.title, :regexp) = false')
+            ->setParameter('regexp', '^[A-Za-z]')
+            ->andWhere('a.status = 1')
+            ->getQuery();
+
+        $paginator  = $this->get('knp_paginator');
+        $pagination = $paginator->paginate(
+            $query, /* query NOT result */
+            $page, /*page number*/
+            80/*limit per page*/
+        );
+        return $this->render('dictionary/list.nodes.html.twig', array(
+            'pagination' => $pagination,
+            'letter' => "Simboli",
+        ));
+    }
+
     public function single_nodeAction($slug)
     {
         $em = $this->getDoctrine()->getManager();

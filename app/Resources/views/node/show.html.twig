@@ -3,7 +3,7 @@
 {% block body %}
     <h1>Node</h1>
 
-    <table>
+    <table class="table">
         <tbody>
             <tr>
                 <th>Id</th>
@@ -40,16 +40,16 @@
         </tbody>
     </table>
 
-    <ul>
+    <ul class="list-inline">
         <li>
-            <a href="{{ path('node_index') }}">Back to the list</a>
+            <a href="{{ path('node_index') }}" class="btn btn-primary">Back to the list</a>
         </li>
         <li>
-            <a href="{{ path('node_edit', { 'id': node.id }) }}">Edit</a>
+            <a href="{{ path('node_edit', { 'id': node.id }) }}" class="btn btn-warning">Edit</a>
         </li>
         <li>
             {{ form_start(delete_form) }}
-                <input type="submit" value="Delete">
+                <input type="submit" class="btn btn-danger" value="Delete">
             {{ form_end(delete_form) }}
         </li>
     </ul>

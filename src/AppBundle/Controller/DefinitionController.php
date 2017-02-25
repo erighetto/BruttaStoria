@@ -16,14 +16,21 @@ class DefinitionController extends Controller
      * Lists all definition entities.
      *
      */
-    public function indexAction()
+    public function indexAction(Request $request)
     {
         $em = $this->getDoctrine()->getManager();
 
-        $definitions = $em->getRepository('AppBundle:Definition')->findAll();
+        $definitions = $em->getRepository('AppBundle:Definition')->findBy(array(), array('created' => 'DESC'));
+
+        $paginator  = $this->get('knp_paginator');
+        $pagination = $paginator->paginate(
+            $definitions, /* query NOT result */
+            $request->query->getInt('page', 1)/*page number*/,
+            20/*limit per page*/
+        );
 
         return $this->render('definition/index.html.twig', array(
-            'definitions' => $definitions,
+            'definitions' => $pagination,
         ));
     }
 
