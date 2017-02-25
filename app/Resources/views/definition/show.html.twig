@@ -1,0 +1,56 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Definition</h1>
+
+    <table>
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ definition.id }}</td>
+            </tr>
+            <tr>
+                <th>Nodeid</th>
+                <td>{{ definition.nodeId }}</td>
+            </tr>
+            <tr>
+                <th>Userid</th>
+                <td>{{ definition.userId }}</td>
+            </tr>
+            <tr>
+                <th>Body</th>
+                <td>{{ definition.body }}</td>
+            </tr>
+            <tr>
+                <th>Status</th>
+                <td>{% if definition.status %}Yes{% else %}No{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Poll</th>
+                <td>{{ definition.poll }}</td>
+            </tr>
+            <tr>
+                <th>Updated</th>
+                <td>{% if definition.updated %}{{ definition.updated|date('Y-m-d H:i:s') }}{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Created</th>
+                <td>{% if definition.created %}{{ definition.created|date('Y-m-d H:i:s') }}{% endif %}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('definition_index') }}">Back to the list</a>
+        </li>
+        <li>
+            <a href="{{ path('definition_edit', { 'id': definition.id }) }}">Edit</a>
+        </li>
+        <li>
+            {{ form_start(delete_form) }}
+                <input type="submit" value="Delete">
+            {{ form_end(delete_form) }}
+        </li>
+    </ul>
+{% endblock %}

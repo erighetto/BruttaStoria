@@ -1,0 +1,55 @@
+AppBundle\Entity\Definition:
+    type: entity
+    table: bs_definitions
+    repositoryClass: AppBundle\Repository\DefinitionRepository
+    id:
+        id:
+            type: bigint
+            nullable: false
+            options:
+                unsigned: false
+            id: true
+            generator:
+                strategy: IDENTITY
+    fields:
+        nodeId:
+            type: bigint
+            nullable: false
+            options:
+                unsigned: false
+            column: node_id
+        userId:
+            type: bigint
+            nullable: false
+            options:
+                unsigned: false
+            column: user_id
+        body:
+            type: text
+            nullable: false
+            length: null
+            options:
+                fixed: false
+        status:
+            type: boolean
+            nullable: false
+            options:
+                default: '0'
+        poll:
+            type: float
+            nullable: false
+            precision: 10
+            scale: 0
+            options:
+                default: '0'
+        updated:
+            type: datetime
+            nullable: false
+            options:
+                default: CURRENT_TIMESTAMP
+        created:
+            type: datetime
+            nullable: false
+            options:
+                default: CURRENT_TIMESTAMP
+    lifecycleCallbacks: {  }

@@ -1,0 +1,24 @@
+hit_index:
+    path:     /
+    defaults: { _controller: "AppBundle:Hit:index" }
+    methods:  GET
+
+hit_show:
+    path:     /{id}/show
+    defaults: { _controller: "AppBundle:Hit:show" }
+    methods:  GET
+
+hit_new:
+    path:     /new
+    defaults: { _controller: "AppBundle:Hit:new" }
+    methods:  [GET, POST]
+
+hit_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "AppBundle:Hit:edit" }
+    methods:  [GET, POST]
+
+hit_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "AppBundle:Hit:delete" }
+    methods:  DELETE

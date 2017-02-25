@@ -1,0 +1,51 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Definitions list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nodeid</th>
+                <th>Userid</th>
+                <th>Body</th>
+                <th>Status</th>
+                <th>Poll</th>
+                <th>Updated</th>
+                <th>Created</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for definition in definitions %}
+            <tr>
+                <td><a href="{{ path('definition_show', { 'id': definition.id }) }}">{{ definition.id }}</a></td>
+                <td>{{ definition.nodeId }}</td>
+                <td>{{ definition.userId }}</td>
+                <td>{{ definition.body }}</td>
+                <td>{% if definition.status %}Yes{% else %}No{% endif %}</td>
+                <td>{{ definition.poll }}</td>
+                <td>{% if definition.updated %}{{ definition.updated|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{% if definition.created %}{{ definition.created|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('definition_show', { 'id': definition.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('definition_edit', { 'id': definition.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('definition_new') }}">Create a new definition</a>
+        </li>
+    </ul>
+{% endblock %}

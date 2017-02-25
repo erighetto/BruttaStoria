@@ -1,0 +1,48 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Hit</h1>
+
+    <table>
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ hit.id }}</td>
+            </tr>
+            <tr>
+                <th>Nodeid</th>
+                <td>{{ hit.nodeId }}</td>
+            </tr>
+            <tr>
+                <th>Visittime</th>
+                <td>{% if hit.visitTime %}{{ hit.visitTime|date('Y-m-d H:i:s') }}{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Referingurl</th>
+                <td>{{ hit.referingUrl }}</td>
+            </tr>
+            <tr>
+                <th>Hitremoteaddr</th>
+                <td>{{ hit.hitRemoteAddr }}</td>
+            </tr>
+            <tr>
+                <th>Hituseragent</th>
+                <td>{{ hit.hitUserAgent }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('hit_index') }}">Back to the list</a>
+        </li>
+        <li>
+            <a href="{{ path('hit_edit', { 'id': hit.id }) }}">Edit</a>
+        </li>
+        <li>
+            {{ form_start(delete_form) }}
+                <input type="submit" value="Delete">
+            {{ form_end(delete_form) }}
+        </li>
+    </ul>
+{% endblock %}

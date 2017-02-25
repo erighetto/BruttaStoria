@@ -1,0 +1,56 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Nodes list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Title</th>
+                <th>Slug</th>
+                <th>Status</th>
+                <th>Promote</th>
+                <th>Sticky</th>
+                <th>Updated</th>
+                <th>Created</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for node in nodes %}
+            <tr>
+                <td><a href="{{ path('node_show', { 'id': node.id }) }}">{{ node.id }}</a></td>
+                <td>{{ node.title }}</td>
+                <td>{{ node.slug }}</td>
+                <td>{% if node.status %}Yes{% else %}No{% endif %}</td>
+                <td>{% if node.promote %}Yes{% else %}No{% endif %}</td>
+                <td>{% if node.sticky %}Yes{% else %}No{% endif %}</td>
+                <td>{% if node.updated %}{{ node.updated|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{% if node.created %}{{ node.created|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('node_show', { 'id': node.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('node_edit', { 'id': node.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    {# display navigation #}
+    <div class="navigation">
+        {{ knp_pagination_render(nodes) }}
+    </div>
+
+    <ul>
+        <li>
+            <a href="{{ path('node_new') }}">Create a new node</a>
+        </li>
+    </ul>
+{% endblock %}

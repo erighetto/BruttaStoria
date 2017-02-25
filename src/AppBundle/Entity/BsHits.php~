@@ -1,0 +1,61 @@
+<?php
+
+namespace AppBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * BsHits
+ *
+ * @ORM\Table(name="bs_hits")
+ * @ORM\Entity
+ */
+class BsHits
+{
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="node_id", type="integer", nullable=true)
+     */
+    private $nodeId;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="visit_time", type="datetime", nullable=false)
+     */
+    private $visitTime = 'CURRENT_TIMESTAMP';
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="refering_url", type="string", length=100, nullable=true)
+     */
+    private $referingUrl;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="hit_remote_addr", type="string", length=15, nullable=true)
+     */
+    private $hitRemoteAddr;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="hit_user_agent", type="string", length=100, nullable=true)
+     */
+    private $hitUserAgent;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $id;
+
+
+}
+

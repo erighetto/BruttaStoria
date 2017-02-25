@@ -1,0 +1,47 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Hits list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nodeid</th>
+                <th>Visittime</th>
+                <th>Referingurl</th>
+                <th>Hitremoteaddr</th>
+                <th>Hituseragent</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for hit in hits %}
+            <tr>
+                <td><a href="{{ path('hit_show', { 'id': hit.id }) }}">{{ hit.id }}</a></td>
+                <td>{{ hit.nodeId }}</td>
+                <td>{% if hit.visitTime %}{{ hit.visitTime|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{{ hit.referingUrl }}</td>
+                <td>{{ hit.hitRemoteAddr }}</td>
+                <td>{{ hit.hitUserAgent }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('hit_show', { 'id': hit.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('hit_edit', { 'id': hit.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('hit_new') }}">Create a new hit</a>
+        </li>
+    </ul>
+{% endblock %}

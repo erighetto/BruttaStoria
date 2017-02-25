@@ -1,0 +1,57 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Node</h1>
+
+    <table>
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ node.id }}</td>
+            </tr>
+            <tr>
+                <th>Title</th>
+                <td>{{ node.title }}</td>
+            </tr>
+            <tr>
+                <th>Slug</th>
+                <td>{{ node.slug }}</td>
+            </tr>
+            <tr>
+                <th>Status</th>
+                <td>{% if node.status %}Yes{% else %}No{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Promote</th>
+                <td>{% if node.promote %}Yes{% else %}No{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Sticky</th>
+                <td>{% if node.sticky %}Yes{% else %}No{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Updated</th>
+                <td>{% if node.updated %}{{ node.updated|date('Y-m-d H:i:s') }}{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Created</th>
+                <td>{% if node.created %}{{ node.created|date('Y-m-d H:i:s') }}{% endif %}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('node_index') }}">Back to the list</a>
+        </li>
+        <li>
+            <a href="{{ path('node_edit', { 'id': node.id }) }}">Edit</a>
+        </li>
+        <li>
+            {{ form_start(delete_form) }}
+                <input type="submit" value="Delete">
+            {{ form_end(delete_form) }}
+        </li>
+    </ul>
+
+{% endblock %}

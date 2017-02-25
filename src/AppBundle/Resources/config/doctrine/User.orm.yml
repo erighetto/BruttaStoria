@@ -1,0 +1,95 @@
+AppBundle\Entity\User:
+    type: entity
+    table: bs_users
+    uniqueConstraints:
+        username:
+            columns:
+                - username
+    id:
+        id:
+            type: bigint
+            nullable: false
+            options:
+                unsigned: false
+            id: true
+            generator:
+                strategy: IDENTITY
+    fields:
+        roleId:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+                default: '2'
+            column: role_id
+        username:
+            type: string
+            nullable: false
+            length: 200
+            options:
+                fixed: false
+        password:
+            type: string
+            nullable: false
+            length: 200
+            options:
+                fixed: false
+        name:
+            type: string
+            nullable: false
+            length: 200
+            options:
+                fixed: false
+        email:
+            type: string
+            nullable: false
+            length: 200
+            options:
+                fixed: false
+        website:
+            type: text
+            nullable: true
+            length: 255
+            options:
+                fixed: false
+        origin:
+            type: string
+            nullable: false
+            length: 200
+            options:
+                fixed: false
+        image:
+            type: text
+            nullable: true
+            length: 255
+            options:
+                fixed: false
+        bio:
+            type: text
+            nullable: true
+            length: 16777215
+            options:
+                fixed: false
+        timezone:
+            type: string
+            nullable: false
+            length: 10
+            options:
+                fixed: false
+                default: '0'
+        status:
+            type: boolean
+            nullable: false
+            options:
+                default: '0'
+        updated:
+            type: datetime
+            nullable: false
+            options:
+                default: CURRENT_TIMESTAMP
+        created:
+            type: datetime
+            nullable: false
+            options:
+                default: CURRENT_TIMESTAMP
+    lifecycleCallbacks: {  }

@@ -1,0 +1,47 @@
+AppBundle\Entity\Hit:
+    type: entity
+    table: bs_hits
+    id:
+        id:
+            type: bigint
+            nullable: false
+            options:
+                unsigned: true
+            id: true
+            generator:
+                strategy: IDENTITY
+    fields:
+        nodeId:
+            type: bigint
+            nullable: true
+            options:
+                unsigned: false
+            column: node_id
+        visitTime:
+            type: datetime
+            nullable: false
+            options:
+                default: CURRENT_TIMESTAMP
+            column: visit_time
+        referingUrl:
+            type: string
+            nullable: true
+            length: 100
+            options:
+                fixed: false
+            column: refering_url
+        hitRemoteAddr:
+            type: string
+            nullable: true
+            length: 15
+            options:
+                fixed: false
+            column: hit_remote_addr
+        hitUserAgent:
+            type: string
+            nullable: true
+            length: 100
+            options:
+                fixed: false
+            column: hit_user_agent
+    lifecycleCallbacks: {  }

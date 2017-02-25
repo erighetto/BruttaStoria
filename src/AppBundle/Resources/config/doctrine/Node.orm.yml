@@ -1,0 +1,56 @@
+AppBundle\Entity\Node:
+    type: entity
+    table: bs_nodes
+    repositoryClass: AppBundle\Repository\NodeRepository
+    uniqueConstraints:
+        slug:
+            columns:
+                - slug
+    id:
+        id:
+            type: bigint
+            nullable: false
+            options:
+                unsigned: false
+            id: true
+            generator:
+                strategy: IDENTITY
+    fields:
+        title:
+            type: string
+            nullable: false
+            length: 255
+            options:
+                fixed: false
+        slug:
+            type: string
+            nullable: false
+            length: 255
+            options:
+                fixed: false
+        status:
+            type: boolean
+            nullable: false
+            options:
+                default: '0'
+        promote:
+            type: boolean
+            nullable: false
+            options:
+                default: '0'
+        sticky:
+            type: boolean
+            nullable: false
+            options:
+                default: '0'
+        updated:
+            type: datetime
+            nullable: false
+            options:
+                default: CURRENT_TIMESTAMP
+        created:
+            type: datetime
+            nullable: false
+            options:
+                default: CURRENT_TIMESTAMP
+    lifecycleCallbacks: {  }
