@@ -27,6 +27,7 @@ security:
     access_control:
         - { path: /security/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/dictionary, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/page, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/definition, roles: ROLE_USER }
         - { path: ^/hit, roles: ROLE_USER }
         - { path: ^/node, roles: ROLE_USER }

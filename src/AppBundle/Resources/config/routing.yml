@@ -18,6 +18,10 @@ app_users:
     resource: "@AppBundle/Resources/config/routing/user.yml"
     prefix: /user
 
+app_page:
+    resource: "@AppBundle/Resources/config/routing/page.yml"
+    prefix: /page
+
 app_dictionary:
     resource: "@AppBundle/Resources/config/routing/dictionary.yml"
     prefix: /dictionary
@@ -31,3 +35,5 @@ default_index:
     path: /
     defaults: { _controller: "AppBundle:Default:index"}
     methods:  GET
+
+

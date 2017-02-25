@@ -1,0 +1,3 @@
+page_manifesto:
+    path:     /manifesto
+    defaults: { _controller: "AppBundle:Page:manifesto" }
