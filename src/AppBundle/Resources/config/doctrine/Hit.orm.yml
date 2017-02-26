@@ -25,7 +25,7 @@ AppBundle\Entity\Hit:
             column: visit_time
         referingUrl:
             type: text
-            nullable: false
+            nullable: true
             length: null
             options:
                 fixed: false
@@ -39,7 +39,7 @@ AppBundle\Entity\Hit:
             column: hit_remote_addr
         hitUserAgent:
             type: text
-            nullable: false
+            nullable: true
             length: null
             options:
                 fixed: false
