@@ -2,7 +2,6 @@
 
 namespace AppBundle\Services;
 
-
 use Symfony\Component\Form\FormFactory;
 use AppBundle\Form\FulltextSearchType;
 use Symfony\Component\Routing\Router;

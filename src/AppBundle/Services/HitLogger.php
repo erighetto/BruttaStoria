@@ -1,6 +1,7 @@
 <?php
 
 namespace AppBundle\Services;
+
 use Doctrine\ORM\EntityManager;
 use AppBundle\Entity\Hit;
 
