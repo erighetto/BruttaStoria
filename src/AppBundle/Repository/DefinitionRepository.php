@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: user
- * Date: 25/02/17
- * Time: 10:18
- */
 
 namespace AppBundle\Repository;
 
@@ -13,13 +7,22 @@ use Doctrine\ORM\Query\Expr\Join;
 use Doctrine\ORM\Query;
 
 
+/**
+ * Class DefinitionRepository
+ * @package AppBundle\Repository
+ */
 class DefinitionRepository extends EntityRepository
 {
 
-    function relatedDefinitions($node_id) {
+    /**
+     * @param $node_id
+     * @return array
+     */
+    function relatedDefinitions($node_id)
+    {
 
-        $em =  $this->getEntityManager();
-        $qb =  $em->createQueryBuilder();
+        $em = $this->getEntityManager();
+        $qb = $em->createQueryBuilder();
         $qb->select(array('d', 'u'))
             ->from('AppBundle:Definition', 'd')
             ->innerJoin('AppBundle:User', 'u', Join::WITH, 'd.userId = u.id')

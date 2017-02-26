@@ -3,7 +3,7 @@
 {% block body %}
     <h1>Definition</h1>
 
-    <table>
+    <table class="table">
         <tbody>
             <tr>
                 <th>Id</th>
@@ -20,6 +20,10 @@
             <tr>
                 <th>Body</th>
                 <td>{{ definition.body }}</td>
+            </tr>
+            <tr>
+                <th>Extra Info</th>
+                <td>{{ definition.extraInfo }}</td>
             </tr>
             <tr>
                 <th>Status</th>
@@ -40,16 +44,16 @@
         </tbody>
     </table>
 
-    <ul>
+    <ul class="list-inline">
         <li>
-            <a href="{{ path('definition_index') }}">Back to the list</a>
+            <a href="{{ path('definition_index') }}" class="btn btn-primary">Back to the list</a>
         </li>
         <li>
-            <a href="{{ path('definition_edit', { 'id': definition.id }) }}">Edit</a>
+            <a href="{{ path('definition_edit', { 'id': definition.id }) }}" class="btn btn-warning">Edit</a>
         </li>
         <li>
             {{ form_start(delete_form) }}
-                <input type="submit" value="Delete">
+                <input type="submit" class="btn btn-danger" value="Delete">
             {{ form_end(delete_form) }}
         </li>
     </ul>

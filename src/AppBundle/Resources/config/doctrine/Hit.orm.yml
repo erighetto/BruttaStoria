@@ -24,9 +24,9 @@ AppBundle\Entity\Hit:
                 default: CURRENT_TIMESTAMP
             column: visit_time
         referingUrl:
-            type: string
+            type: text
             nullable: true
-            length: 100
+            length: null
             options:
                 fixed: false
             column: refering_url
@@ -38,9 +38,9 @@ AppBundle\Entity\Hit:
                 fixed: false
             column: hit_remote_addr
         hitUserAgent:
-            type: string
+            type: text
             nullable: true
-            length: 100
+            length: null
             options:
                 fixed: false
             column: hit_user_agent

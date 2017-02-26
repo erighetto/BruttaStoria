@@ -1,24 +1,13 @@
-<h3>Categorie</h3>
+<h3>Menu</h3>
 <ul class="nav nav-sidebar">
-    <li class="active"><a href="#">Overview</a></li>
-    <li><a href="#">Reports</a></li>
-    <li><a href="#">Analytics</a></li>
-    <li><a href="#">Export</a></li>
+    <li class="active"><a href="{{ url('default_index', { }, true) }}">Home <strong>Brutta Storia</strong></a></li>
+    <li><a href="{{ url('page_manifesto') }}">Che cos'è <strong>Brutta Storia</strong>?</a></li>
+    <li><a href="mailto:redazione.bruttastoria@gmail.com">Contatta la <strong>Redazione Brutta Storia</strong></a></li>
+    <li><a href="http://www.facebook.com/pages/Brutta-Storia-Manuale-di-lingua-e-mitologia-urbana/150473342139"><strong>Brutta Storia</strong> @ <i class="fa fa-facebook-square fa-2x" aria-hidden="true"></i></a></li>
 </ul>
-<h3>Tag</h3>
-<ul class="nav nav-sidebar">
-    <li><a href="">Nav item</a></li>
-    <li><a href="">Nav item again</a></li>
-    <li><a href="">One more nav</a></li>
-    <li><a href="">Another nav item</a></li>
-    <li><a href="">More navigation</a></li>
-</ul>
-<h3>Città</h3>
-<ul class="nav nav-sidebar">
-    <li><a href="">Roma</a></li>
-    <li><a href="">Napoli</a></li>
-    <li><a href="">Milano</a></li>
-    <li><a href="">Palermo</a></li>
-    <li><a href="">Venezia</a></li>
-    <li><a href="">Torino</a></li>
-</ul>
+
+<h3>Cerca in Brutta Storia</h3>
+{% form_theme fulltextSearch.getSearchForm 'fulltextsearch_form.html.twig' %}
+{{ form(fulltextSearch.getSearchForm) }}
+
+<a href="https://lorisrighetto.com/abcdiario-di-lingua-e-mitologia-urbana/"><img src="{{ asset('images/abcdiario.jpg') }}" class="img-responsive"></a>

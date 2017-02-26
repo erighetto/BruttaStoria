@@ -3,11 +3,10 @@
         <h3 class="panel-title">Dizionario</h3>
     </div>
     <div class="panel-body">
-        <a href="dictionary/random">random</a>
+
         {% for i in 'a'|upper..'z'|upper %}
             <a href="{{ path('list_nodes', { 'letter': i, 'page': 1 }) }}">{{ i }}</a>
         {% endfor %}
-        <a href="{{ path('list_nodes', { 'letter': '%2A', 'page': 1 }) }}">#</a>
-        <a href="dictionary/yesterday">new</a>
+        <a href="{{ path('list_bysymbol_nodes', { 'page': 1 }) }}">Vocaboli che iniziano con simboli</a>
     </div>
 </div>

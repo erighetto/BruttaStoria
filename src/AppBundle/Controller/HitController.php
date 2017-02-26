@@ -16,14 +16,21 @@ class HitController extends Controller
      * Lists all hit entities.
      *
      */
-    public function indexAction()
+    public function indexAction(Request $request)
     {
         $em = $this->getDoctrine()->getManager();
 
-        $hits = $em->getRepository('AppBundle:Hit')->findAll();
+        $hits = $em->getRepository('AppBundle:Hit')->findBy(array(), array('visitTime' => 'DESC'));
+
+        $paginator  = $this->get('knp_paginator');
+        $pagination = $paginator->paginate(
+            $hits, /* query NOT result */
+            $request->query->getInt('page', 1)/*page number*/,
+            20/*limit per page*/
+        );
 
         return $this->render('hit/index.html.twig', array(
-            'hits' => $hits,
+            'hits' => $pagination,
         ));
     }
 

@@ -5,6 +5,7 @@ namespace AppBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Cookie;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Request;
 
 class DictionaryController extends Controller
 {
@@ -32,6 +33,56 @@ class DictionaryController extends Controller
         ));
     }
 
+    public function list_bysymbol_nodesAction($page)
+    {
+        $em    = $this->getDoctrine()->getManager();
+
+        $query = $em->createQueryBuilder()
+            ->select('a')
+            ->from('AppBundle:Node','a')
+            ->where('REGEXP(a.title, :regexp) = false')
+            ->andWhere('a.status = 1')
+            ->setParameter('regexp', '^[A-Za-z]')
+            ->getQuery();
+
+        $paginator  = $this->get('knp_paginator');
+        $pagination = $paginator->paginate(
+            $query, /* query NOT result */
+            $page, /*page number*/
+            80/*limit per page*/
+        );
+        return $this->render('dictionary/list.nodes.html.twig', array(
+            'pagination' => $pagination,
+            'letter' => "Simboli",
+        ));
+    }
+
+    public function search_nodeAction(Request $request)
+    {
+
+        $form = $request->get('appbundle_node');
+
+        $em = $this->getDoctrine()->getManager();
+        $query = $em->createQueryBuilder()
+            ->select('a')
+            ->from('AppBundle:Node','a')
+            ->where('a.title LIKE :parola')
+            ->andWhere('a.status = 1')
+            ->setParameter('parola', '%'.$form['parola'].'%')
+            ->getQuery();
+
+        $paginator  = $this->get('knp_paginator');
+        $pagination = $paginator->paginate(
+            $query, /* query NOT result */
+            1, /*page number*/
+            800 /*limit per page*/
+        );
+        return $this->render('dictionary/list.nodes.html.twig', array(
+            'pagination' => $pagination,
+            'letter' => $form['parola'],
+        ));
+    }
+
     public function single_nodeAction($slug)
     {
         $em = $this->getDoctrine()->getManager();
@@ -43,13 +94,18 @@ class DictionaryController extends Controller
             throw $this->createNotFoundException(
                 'No word found'
             );
+        } else {
+            $id = $node->getId();
+            $definitions = $em->getRepository('AppBundle:Definition')->relatedDefinitions($id);
+            $related = $em->getRepository('AppBundle:Node')->relatedNode($id);
+            $logger = $this->get('app.hitlogger');
+            $logger->writeRecord($id);
         }
-
-        $definitions = $em->getRepository('AppBundle:Definition')->relatedDefinitions($node->getId());
 
         return $this->render('dictionary/single.node.html.twig', array(
             'node' => $node,
             'definitions' => $definitions,
+            'related' => $related
         ));
 
     }
