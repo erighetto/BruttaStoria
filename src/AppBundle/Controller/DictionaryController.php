@@ -98,6 +98,8 @@ class DictionaryController extends Controller
             $id = $node->getId();
             $definitions = $em->getRepository('AppBundle:Definition')->relatedDefinitions($id);
             $related = $em->getRepository('AppBundle:Node')->relatedNode($id);
+            $logger = $this->get('app.hitlogger');
+            $logger->writeRecord($id);
         }
 
         return $this->render('dictionary/single.node.html.twig', array(

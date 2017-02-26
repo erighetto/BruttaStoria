@@ -38,7 +38,7 @@ class Hit
     /**
      * @var string
      *
-     * @ORM\Column(name="refering_url", type="string", length=100, nullable=true)
+     * @ORM\Column(name="refering_url", type="text", nullable=true)
      */
     private $referingUrl;
 
@@ -52,7 +52,7 @@ class Hit
     /**
      * @var string
      *
-     * @ORM\Column(name="hit_user_agent", type="string", length=100, nullable=true)
+     * @ORM\Column(name="hit_user_agent", type="text", nullable=true)
      */
     private $hitUserAgent;
 

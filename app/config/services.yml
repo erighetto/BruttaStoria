@@ -7,10 +7,17 @@ services:
 #    service_name:
 #        class: AppBundle\Directory\ClassName
 #        arguments: ["@another_service_name", "plain_value", "%parameter_name%"]
-    twig.extension.text:
-            class: Twig_Extensions_Extension_Text
-            tags:
-                - { name: twig.extension }
     app.fulltextsearch:
-            class: AppBundle\Services\FulltextSearch
-            arguments: ['@router','@form.factory']
+      arguments:
+        - "@router"
+        - "@form.factory"
+      class: AppBundle\Services\FulltextSearch
+    app.hitlogger:
+      arguments:
+        - "@doctrine.orm.entity_manager"
+      class: AppBundle\Services\HitLogger
+    twig.extension.text:
+      class: Twig_Extensions_Extension_Text
+      tags:
+        -
+          name: twig.extension
