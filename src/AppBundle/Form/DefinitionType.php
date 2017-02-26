@@ -13,7 +13,7 @@ class DefinitionType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('nodeId')->add('userId')->add('body')->add('status')->add('poll')->add('updated')->add('created')->add('nodes')->add('users')        ;
+        $builder->add('nodeId')->add('userId')->add('body')->add('extraInfo')->add('status')->add('poll')->add('updated')->add('created')->add('nodes')->add('users')        ;
     }
     
     /**

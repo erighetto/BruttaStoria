@@ -30,6 +30,13 @@ AppBundle\Entity\Definition:
             length: null
             options:
                 fixed: false
+        extraInfo:
+            type: text
+            nullable: false
+            length: null
+            options:
+                fixed: false
+            column: extra_info
         status:
             type: boolean
             nullable: false

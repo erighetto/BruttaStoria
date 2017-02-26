@@ -10,6 +10,7 @@
                 <th>Nodeid</th>
                 <th>Userid</th>
                 <th>Body</th>
+                <th>ExtraInfo</th>
                 <th>Status</th>
                 <th>Poll</th>
                 <th>Updated</th>
@@ -24,6 +25,7 @@
                 <td>{{ definition.nodeId }}</td>
                 <td>{{ definition.userId }}</td>
                 <td>{{ definition.body }}</td>
+                <td>{{ definition.extraInfo }}</td>
                 <td>{% if definition.status %}Yes{% else %}No{% endif %}</td>
                 <td>{{ definition.poll }}</td>
                 <td>{% if definition.updated %}{{ definition.updated|date('Y-m-d H:i:s') }}{% endif %}</td>

@@ -43,6 +43,13 @@ class Definition
     private $body;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="extra_info", type="text", nullable=false)
+     */
+    private $extraInfo;
+
+    /**
      * @var boolean
      *
      * @ORM\Column(name="status", type="boolean", nullable=false)
@@ -152,6 +159,22 @@ class Definition
     public function getBody()
     {
         return $this->body;
+    }
+
+    /**
+     * @return string
+     */
+    public function getExtraInfo()
+    {
+        return $this->extraInfo;
+    }
+
+    /**
+     * @param string $extraInfo
+     */
+    public function setExtraInfo($extraInfo)
+    {
+        $this->extraInfo = $extraInfo;
     }
 
     /**
