@@ -16,10 +16,10 @@
                         Pubblicato il
                         <time pubdate datetime="{{ entity.d_updated|date }}">{{ entity.d_updated|date }}</time>
                     </header>
-                    {{ entity.d_body|raw }}
+                    {{ entity.d_body|raw|nl2br }}
                     {% if entity.d_extraInfo %}
                     <blockquote>
-                        {{ entity.d_extraInfo|raw }}
+                        {{ entity.d_extraInfo|raw|nl2br }}
                     </blockquote>
                     {% endif %}
                     <footer>
