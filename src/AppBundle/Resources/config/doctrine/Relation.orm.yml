@@ -1,0 +1,26 @@
+AppBundle\Entity\Relation:
+    type: entity
+    table: bs_relations
+    id:
+        id:
+            type: bigint
+            nullable: false
+            options:
+                unsigned: false
+            id: true
+            generator:
+                strategy: IDENTITY
+    fields:
+        nodeId:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+            column: node_id
+        relatedNodeId:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+            column: related_node_id
+    lifecycleCallbacks: {  }

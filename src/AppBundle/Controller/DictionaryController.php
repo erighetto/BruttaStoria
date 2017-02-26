@@ -67,13 +67,16 @@ class DictionaryController extends Controller
             throw $this->createNotFoundException(
                 'No word found'
             );
+        } else {
+            $id = $node->getId();
+            $definitions = $em->getRepository('AppBundle:Definition')->relatedDefinitions($id);
+            $related = $em->getRepository('AppBundle:Node')->relatedNode($id);
         }
-
-        $definitions = $em->getRepository('AppBundle:Definition')->relatedDefinitions($node->getId());
 
         return $this->render('dictionary/single.node.html.twig', array(
             'node' => $node,
             'definitions' => $definitions,
+            'related' => $related
         ));
 
     }

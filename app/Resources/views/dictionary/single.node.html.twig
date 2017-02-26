@@ -3,26 +3,42 @@
 {% block title %}{{ node.title }}{% endblock %}
 
 {% block body %}
-<h1>{{ node.title }}</h1>
+    <h1>{{ node.title }}</h1>
 
     {% for entity in definitions %}
-                            <div class="panel panel-default">
-                                <div class="panel-heading">di {{entity.u_name}} da {{entity.u_origin}}
-                                </div>
-                                <div class="panel-body">
-                                    <article>
-                                        <header>
-                                            Pubblicato il <time pubdate datetime="{{entity.d_updated|date}}">{{entity.d_updated|date}}</time>
-                                        </header>
-                                        {{entity.d_body|raw}}
-                                        <footer>
-                                            <a href="#{{entity.d_id}}"><span class="glyphicon glyphicon-plus"></span></a>  <a href="#{{entity.d_id}}"><span class="glyphicon glyphicon-minus"></span></a> <span class="poll">{{entity.d_poll}}</span>
-                                        </footer>
-                                    </article>
-                                </div>
-                            </div>
-        {% endfor %}
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                di {{ entity.u_name }} da {{ entity.u_origin }}
+            </div>
+            <div class="panel-body">
+                <article>
+                    <header>
+                        Pubblicato il
+                        <time pubdate datetime="{{ entity.d_updated|date }}">{{ entity.d_updated|date }}</time>
+                    </header>
+                    {{ entity.d_body|raw }}
+                    {% if entity.d_extraInfo %}
+                    <blockquote>
+                        {{ entity.d_extraInfo|raw }}
+                    </blockquote>
+                    {% endif %}
+                    <footer>
+                        <a href="#{{ entity.d_id }}"><span class="glyphicon glyphicon-plus"></span></a>
+                        <a href="#{{ entity.d_id }}"><span class="glyphicon glyphicon-minus"></span></a> |
+                        Voti: <span class="badge poll">{{ entity.d_poll }}</span>
+                    </footer>
+                </article>
+            </div>
+        </div>
+    {% endfor %}
 
-
+    {% if related %}
+        <h3>Figate collegate</h3>
+        <ul class="list-inline">
+            {% for node in related %}
+                <li><a href="{{ path('single_node', { 'slug': node.n_slug }) }}">{{ node.n_title }}</a></li>
+            {% endfor %}
+        </ul>
+    {% endif %}
 
 {% endblock %}

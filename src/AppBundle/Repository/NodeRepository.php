@@ -57,4 +57,24 @@ class NodeRepository extends EntityRepository
 
         return $results;
     }
+
+    /**
+     * @return array
+     */
+    function relatedNode($nodeId) {
+
+        $em =  $this->getEntityManager();
+        $qb =  $em->createQueryBuilder();
+        $qb->select(array('n', 'r'))
+            ->from('AppBundle:Node', 'n')
+            ->innerJoin('AppBundle:Relation','r', Join::WITH, 'r.relatedNodeId = n.id')
+            ->where('n.status = 1')
+            ->andWhere('r.nodeId = :node_id')
+            ->orderBy('n.title', 'ASC')
+            ->setParameter('node_id', $nodeId);
+        $query = $qb->getQuery();
+        $results = $query->getResult(Query::HYDRATE_SCALAR);
+
+        return $results;
+    }
 }
