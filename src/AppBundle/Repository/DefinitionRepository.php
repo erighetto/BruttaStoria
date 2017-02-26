@@ -18,10 +18,11 @@ class DefinitionRepository extends EntityRepository
      * @param $node_id
      * @return array
      */
-    function relatedDefinitions($node_id) {
+    function relatedDefinitions($node_id)
+    {
 
-        $em =  $this->getEntityManager();
-        $qb =  $em->createQueryBuilder();
+        $em = $this->getEntityManager();
+        $qb = $em->createQueryBuilder();
         $qb->select(array('d', 'u'))
             ->from('AppBundle:Definition', 'd')
             ->innerJoin('AppBundle:User', 'u', Join::WITH, 'd.userId = u.id')

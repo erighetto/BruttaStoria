@@ -38,6 +38,8 @@ framework:
 twig:
     debug:            "%kernel.debug%"
     strict_variables: "%kernel.debug%"
+    globals:
+        fulltextSearch: "@app.fulltextsearch"
 
 # Doctrine Configuration
 doctrine:

@@ -5,6 +5,7 @@ namespace AppBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Cookie;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Request;
 
 class DictionaryController extends Controller
 {
@@ -40,8 +41,8 @@ class DictionaryController extends Controller
             ->select('a')
             ->from('AppBundle:Node','a')
             ->where('REGEXP(a.title, :regexp) = false')
-            ->setParameter('regexp', '^[A-Za-z]')
             ->andWhere('a.status = 1')
+            ->setParameter('regexp', '^[A-Za-z]')
             ->getQuery();
 
         $paginator  = $this->get('knp_paginator');
@@ -53,6 +54,32 @@ class DictionaryController extends Controller
         return $this->render('dictionary/list.nodes.html.twig', array(
             'pagination' => $pagination,
             'letter' => "Simboli",
+        ));
+    }
+
+    public function search_nodeAction(Request $request)
+    {
+
+        $form = $request->get('appbundle_node');
+
+        $em = $this->getDoctrine()->getManager();
+        $query = $em->createQueryBuilder()
+            ->select('a')
+            ->from('AppBundle:Node','a')
+            ->where('a.title LIKE :parola')
+            ->andWhere('a.status = 1')
+            ->setParameter('parola', '%'.$form['parola'].'%')
+            ->getQuery();
+
+        $paginator  = $this->get('knp_paginator');
+        $pagination = $paginator->paginate(
+            $query, /* query NOT result */
+            1, /*page number*/
+            800 /*limit per page*/
+        );
+        return $this->render('dictionary/list.nodes.html.twig', array(
+            'pagination' => $pagination,
+            'letter' => $form['parola'],
         ));
     }
 

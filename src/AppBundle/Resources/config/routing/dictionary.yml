@@ -1,15 +1,20 @@
 list_nodes:
-    path:     /initial/{letter}/{page}
-    defaults: { _controller: AppBundle:Dictionary:list_nodes, page: 1 }
+    path: /initial/{letter}/{page}
+    defaults: { _controller: "AppBundle:Dictionary:list_nodes", page: 1 }
 
 list_bysymbol_nodes:
-    path:     /symbol/{page}
-    defaults: { _controller: AppBundle:Dictionary:list_bysymbol_nodes, page: 1 }
-
-single_node:
-    path:     /{slug}
-    defaults: { _controller: AppBundle:Dictionary:single_node }
+    path: /symbol/{page}
+    defaults: { _controller: "AppBundle:Dictionary:list_bysymbol_nodes", page: 1 }
 
 vote_node:
-    path:     /poll/{id}/{action}
-    defaults: { _controller: AppBundle:Dictionary:vote_node }
+    path: /poll/{id}/{action}
+    defaults: { _controller: "AppBundle:Dictionary:vote_node" }
+
+search_node:
+    path: /search/word
+    defaults: { _controller: "AppBundle:Dictionary:search_node"}
+    methods:  POST
+
+single_node:
+    path: /{slug}
+    defaults: { _controller: "AppBundle:Dictionary:single_node" }

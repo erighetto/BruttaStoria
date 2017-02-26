@@ -11,3 +11,6 @@ services:
             class: Twig_Extensions_Extension_Text
             tags:
                 - { name: twig.extension }
+    app.fulltextsearch:
+            class: AppBundle\Services\FulltextSearch
+            arguments: ['@router','@form.factory']
