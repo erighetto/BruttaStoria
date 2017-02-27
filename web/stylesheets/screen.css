@@ -223,4 +223,47 @@ a.list-group-item-danger.active:hover, a.list-group-item-danger.active:focus {
   background: url("../images/brutta_storia_header.jpg");
   background-repeat: no-repeat;
   background-size: cover;
+  min-height: 30vw;
+}
+/* line 6, ../sass/_custom.scss */
+.jumbotron h1 {
+  background: rgba(255, 255, 255, 0.6);
+  text-align: center;
+  padding: 30px 0;
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+/* line 16, ../sass/_custom.scss */
+#sidebar aside {
+  margin: 60px 0;
+}
+/* line 18, ../sass/_custom.scss */
+#sidebar aside:first-of-type {
+  margin: 0 0 60px 0;
+}
+/* line 20, ../sass/_custom.scss */
+#sidebar aside:first-of-type h3 {
+  margin-top: 0;
+  padding-top: 0;
+}
+
+/* line 30, ../sass/_custom.scss */
+#dizionario header a {
+  padding: 0 0.2em 0 0;
+}
+
+/* line 38, ../sass/_custom.scss */
+#singolo-lemma__detail article header {
+  font-style: italic;
+  text-align: right;
+  margin-bottom: 30px;
+}
+/* line 43, ../sass/_custom.scss */
+#singolo-lemma__detail article blockquote {
+  margin: 30px 0 0 0;
+}
+/* line 46, ../sass/_custom.scss */
+#singolo-lemma__detail article footer {
+  margin-top: 30px;
 }

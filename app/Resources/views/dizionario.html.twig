@@ -1,12 +1,15 @@
-<div class="panel panel-default">
+<div id="dizionario" class="panel panel-default">
     <div class="panel-heading">
         <h3 class="panel-title">Dizionario</h3>
     </div>
     <div class="panel-body">
-
-        {% for i in 'a'|upper..'z'|upper %}
-            <a href="{{ path('list_nodes', { 'letter': i, 'page': 1 }) }}">{{ i }}</a>
-        {% endfor %}
-        <a href="{{ path('list_bysymbol_nodes', { 'page': 1 }) }}">Vocaboli che iniziano con simboli</a>
+        <header>
+            {% for i in 'a'|upper..'z'|upper %}
+                <a href="{{ path('list_nodes', { 'letter': i, 'page': 1 }) }}"><span class="label label-default">{{ i }}</span></a>
+            {% endfor %}
+        </header>
+        <footer>
+            <a href="{{ path('list_bysymbol_nodes', { 'page': 1 }) }}">Vocaboli che iniziano con simboli</a>
+        </footer>
     </div>
 </div>

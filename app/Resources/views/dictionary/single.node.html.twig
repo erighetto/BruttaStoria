@@ -5,6 +5,7 @@
 {% block body %}
     <h1>{{ node.title }}</h1>
 
+    <div id="singolo-lemma__detail">
     {% for entity in definitions %}
         <div class="panel panel-default">
             <div class="panel-heading">
@@ -16,7 +17,7 @@
                         Pubblicato il
                         <time pubdate datetime="{{ entity.d_updated|date }}">{{ entity.d_updated|date }}</time>
                     </header>
-                    {{ entity.d_body|raw|nl2br }}
+                    {{ entity.d_body|raw }}
                     {% if entity.d_extraInfo %}
                     <blockquote>
                         {{ entity.d_extraInfo|raw|nl2br }}
@@ -40,5 +41,5 @@
             {% endfor %}
         </ul>
     {% endif %}
-
+    </div>
 {% endblock %}

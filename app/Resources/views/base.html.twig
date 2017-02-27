@@ -36,7 +36,7 @@
         <div id="navbar" class="navbar-collapse collapse">
             <form class="navbar-form navbar-right">
                 <div class="form-group">
-                    <input type="text" placeholder="Email" class="form-control">
+                    <input type="text" placeholder="Username" class="form-control">
                 </div>
                 <div class="form-group">
                     <input type="password" placeholder="Password" class="form-control">
@@ -48,9 +48,7 @@
 </nav>
 
 <div class="jumbotron">
-    <div class="container">
-            <h1>Manuale di lingua e mitologia urbana</h1>
-    </div>
+    <h1>Manuale di lingua e mitologia urbana</h1>
 </div>
 
 <div class="container">
@@ -60,9 +58,8 @@
         {% block body %}{% endblock %}
         {% block javascripts %}{% endblock %}
     </div>
-    <div class="col-md-3">
+    <div id="sidebar" class="col-md-3">
         {% include 'sidebar.html.twig' %}
-        {% include 'dizionario.html.twig' %}
     </div>
     </div>
 
@@ -80,5 +77,6 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <!-- Latest compiled and minified JavaScript -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<script src="{{ asset('javascript/assets.js') }}"></script>
 </body>
 </html>
