@@ -5,6 +5,7 @@ namespace AppBundle\Form;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Captcha\Bundle\CaptchaBundle\Form\Type\CaptchaType;
 
 class UserType extends AbstractType
 {
@@ -13,9 +14,25 @@ class UserType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('roleId')->add('username')->add('password')->add('name')->add('email')->add('website')->add('origin')->add('image')->add('bio')->add('timezone')->add('status')->add('updated')->add('created')        ;
+        $builder
+            ->add('roleId')
+            ->add('username')
+            ->add('password')
+            ->add('name')
+            ->add('email')
+            ->add('website')
+            ->add('origin')
+            ->add('image')
+            ->add('bio')
+            ->add('timezone')
+            ->add('status')
+            ->add('updated')
+            ->add('created')
+            ->add('captchaCode', CaptchaType::class, array(
+                'captchaConfig' => 'UserCaptcha'
+            ));
     }
-    
+
     /**
      * {@inheritdoc}
      */
