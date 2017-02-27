@@ -18,18 +18,6 @@ class SecurityController extends Controller
         // last username entered by the user
         $lastUsername = $authenticationUtils->getLastUsername();
 
-        /*// create example form
-        $exampleForm = $this->createForm(ExampleType::class, new Example());
-
-        // initially, the message shown to the visitor is empty
-        $message = '';
-
-        $exampleForm ->handleRequest($request);
-        if ($exampleForm->isValid()) {
-            // Captcha validation passed
-            $message = 'CAPTCHA validation passed, human visitor confirmed!';
-        }*/
-
         return $this->render('security/login.html.twig', array(
             'last_username' => $lastUsername,
             'error' => $error,
