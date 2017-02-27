@@ -25,7 +25,6 @@
         "twig/twig": "^1.0||^2.0",
         "knplabs/knp-paginator-bundle": "^2.5",
         "beberlei/DoctrineExtensions": "^1.0",
-        "captcha-com/symfony-captcha-bundle": "4.*",
         "twig/extensions": "^1.4"
     },
     "require-dev": {

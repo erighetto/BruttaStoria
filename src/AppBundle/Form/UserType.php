@@ -5,7 +5,6 @@ namespace AppBundle\Form;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Captcha\Bundle\CaptchaBundle\Form\Type\CaptchaType;
 
 class UserType extends AbstractType
 {
@@ -27,10 +26,7 @@ class UserType extends AbstractType
             ->add('timezone')
             ->add('status')
             ->add('updated')
-            ->add('created')
-            ->add('captchaCode', CaptchaType::class, array(
-                'captchaConfig' => 'UserCaptcha'
-            ));
+            ->add('created');
     }
 
     /**
