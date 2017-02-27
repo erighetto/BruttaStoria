@@ -32,3 +32,19 @@
     }
   }
 }
+
+#singolo-lemma__detail {
+  article {
+    header {
+      font-style: italic;
+      text-align: right;
+      margin-bottom: $grid-gutter-width;
+    }
+    blockquote {
+      margin: $grid-gutter-width 0 0 0;
+    }
+    footer {
+      margin-top: $grid-gutter-width;
+    }
+  }
+}
