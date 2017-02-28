@@ -21,3 +21,10 @@ services:
       tags:
         -
           name: twig.extension
+    app.sitemap.nodes_subscriber:
+      class:     AppBundle\EventListener\SitemapNodeSubscriber
+      arguments:
+        - "@router"
+        - "@doctrine.orm.entity_manager"
+      tags:
+        - { name: "kernel.event_subscriber", priority: 100 }
