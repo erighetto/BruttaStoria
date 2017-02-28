@@ -14,7 +14,7 @@ class DictionaryController extends Controller
         $em = $this->getDoctrine()->getManager();
 
         $query = $em->getRepository('AppBundle:Node')
-            ->findNodeByAlphabeticalOrder($letter);
+            ->findByAlphabeticalOrder($letter);
 
         $paginator = $this->get('knp_paginator');
         $pagination = $paginator->paginate(
@@ -85,8 +85,8 @@ class DictionaryController extends Controller
             );
         } else {
             $id = $node->getId();
-            $definitions = $em->getRepository('AppBundle:Definition')->relatedDefinitions($id);
-            $related = $em->getRepository('AppBundle:Node')->relatedNode($id);
+            $definitions = $em->getRepository('AppBundle:Definition')->findRelatedDefinitions($id);
+            $related = $em->getRepository('AppBundle:Node')->findRelatedNode($id);
             $logger = $this->get('app.hitlogger');
             $logger->writeRecord($id);
         }

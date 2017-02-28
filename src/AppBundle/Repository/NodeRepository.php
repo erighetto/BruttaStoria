@@ -16,7 +16,7 @@ class NodeRepository extends EntityRepository
     /**
      * @return array
      */
-    function topTenSticked()
+    function findTopTenSticked()
     {
 
         $em = $this->getEntityManager();
@@ -39,7 +39,7 @@ class NodeRepository extends EntityRepository
     /**
      * @return array
      */
-    function topTenPromoted()
+    function findTopTenPromoted()
     {
 
         $em = $this->getEntityManager();
@@ -62,7 +62,7 @@ class NodeRepository extends EntityRepository
     /**
      * @return array
      */
-    function relatedNode($nodeId)
+    function findRelatedNode($nodeId)
     {
 
         $em = $this->getEntityManager();
@@ -84,7 +84,7 @@ class NodeRepository extends EntityRepository
      * @param $word
      * @return Query
      */
-    function findByWordLike ($word) {
+    function findByWordLike($word) {
         $em = $this->getEntityManager();
         $query = $em->createQueryBuilder()
             ->select('n')
@@ -119,7 +119,7 @@ class NodeRepository extends EntityRepository
      * @param $letter
      * @return Query
      */
-    function findNodeByAlphabeticalOrder($letter) {
+    function findByAlphabeticalOrder($letter) {
         $em = $this->getEntityManager();
         $query = $em->createQueryBuilder()
             ->select('n')
