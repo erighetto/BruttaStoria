@@ -46,7 +46,7 @@ class SitemapNodeSubscriber implements EventSubscriberInterface
      */
     public function registerNodesPages(SitemapPopulateEvent $event)
     {
-        $nodes = $this->manager->getRepository('AppBundle:Node')->findAll();
+        $nodes = $this->manager->getRepository('AppBundle:Node')->findAll(array(), array('username' => 'ASC'));
         foreach ($nodes as $node) {
             $event->getUrlContainer()->addUrl(
                 new UrlConcrete(
@@ -54,7 +54,9 @@ class SitemapNodeSubscriber implements EventSubscriberInterface
                         'single_node',
                         ['slug' => $node->getSlug()],
                         UrlGeneratorInterface::ABSOLUTE_URL
-                    )
+                    ),
+                    $node->getUpdated(),
+                    UrlConcrete::CHANGEFREQ_MONTHLY
                 ),
                 'nodes'
             );
@@ -65,9 +67,11 @@ class SitemapNodeSubscriber implements EventSubscriberInterface
                 new UrlConcrete(
                     $this->urlGenerator->generate(
                         'list_nodes',
-                        ['slug' => strtoupper($letter)],
+                        ['letter' => strtoupper($letter)],
                         UrlGeneratorInterface::ABSOLUTE_URL
-                    )
+                    ),
+                    new \DateTime(),
+                    UrlConcrete::CHANGEFREQ_MONTHLY
                 ),
                 'alphabetical'
             );
