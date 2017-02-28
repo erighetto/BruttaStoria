@@ -11,7 +11,7 @@
             <ul>
             {% for node in sticked_nodes %}
                     <li><a href="{{ path('single_node', { 'slug': node.slug }) }}">{{ node.title }}</a>
-                        {{ node.body|striptags|convert_encoding('UTF-8', 'HTML-ENTITIES')|truncate(200, '...') }}</li>
+                        {{ node.body|striptags|truncate(200, '...') }}</li>
             {% endfor %}
             </ul>
         </div>

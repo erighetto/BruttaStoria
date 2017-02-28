@@ -10,9 +10,9 @@ vote_node:
     path: /poll/{id}/{action}
     defaults: { _controller: "AppBundle:Dictionary:vote_node" }
 
-search_node:
+search_nodes:
     path: /search/word
-    defaults: { _controller: "AppBundle:Dictionary:search_node"}
+    defaults: { _controller: "AppBundle:Dictionary:search_nodes"}
     methods:  POST
 
 single_node:

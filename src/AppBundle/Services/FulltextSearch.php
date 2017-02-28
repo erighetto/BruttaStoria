@@ -39,7 +39,7 @@ class FulltextSearch
     public function getSearchForm()
     {
         $form = $this->formFactory->createBuilder(FulltextSearchType::class)
-            ->setAction($this->router->generate('search_node'))
+            ->setAction($this->router->generate('search_nodes'))
             ->getForm();
 
         return $form->createView();

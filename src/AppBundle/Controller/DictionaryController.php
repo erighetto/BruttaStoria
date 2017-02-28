@@ -13,14 +13,8 @@ class DictionaryController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $query = $em->createQueryBuilder()
-            ->select('a')
-            ->from('AppBundle:Node', 'a')
-            ->where('a.title LIKE :title')
-            ->andWhere('a.status = 1')
-            ->setParameter('title', $letter . '%')
-            ->orderBy('a.title', 'ASC')
-            ->getQuery();
+        $query = $em->getRepository('AppBundle:Node')
+            ->findNodeByAlphabeticalOrder($letter);
 
         $paginator = $this->get('knp_paginator');
         $pagination = $paginator->paginate(
@@ -38,14 +32,8 @@ class DictionaryController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $query = $em->createQueryBuilder()
-            ->select('a')
-            ->from('AppBundle:Node', 'a')
-            ->where('REGEXP(a.title, :regexp) = false')
-            ->andWhere('a.status = 1')
-            ->setParameter('regexp', '^[A-Za-z]')
-            ->orderBy('a.title', 'ASC')
-            ->getQuery();
+        $query = $em->getRepository('AppBundle:Node')
+            ->findBySymbol();
 
         $paginator = $this->get('knp_paginator');
         $pagination = $paginator->paginate(
@@ -59,20 +47,14 @@ class DictionaryController extends Controller
         ));
     }
 
-    public function search_nodeAction(Request $request)
+    public function search_nodesAction(Request $request)
     {
 
         $form = $request->get('appbundle_node');
 
         $em = $this->getDoctrine()->getManager();
-        $query = $em->createQueryBuilder()
-            ->select('a')
-            ->from('AppBundle:Node', 'a')
-            ->where('a.title LIKE :parola')
-            ->andWhere('a.status = 1')
-            ->setParameter('parola', '%' . $form['parola'] . '%')
-            ->orderBy('a.title', 'ASC')
-            ->getQuery();
+        $query = $em->getRepository('AppBundle:Node')
+            ->findByWordLike($form['parola']);
 
         $paginator = $this->get('knp_paginator');
         $pagination = $paginator->paginate(

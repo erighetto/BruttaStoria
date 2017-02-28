@@ -79,4 +79,57 @@ class NodeRepository extends EntityRepository
 
         return $results;
     }
+
+    /**
+     * @param $word
+     * @return Query
+     */
+    function findByWordLike ($word) {
+        $em = $this->getEntityManager();
+        $query = $em->createQueryBuilder()
+            ->select('a')
+            ->from('AppBundle:Node', 'a')
+            ->where('a.title LIKE :parola')
+            ->andWhere('a.status = 1')
+            ->setParameter('parola', '%' . $word . '%')
+            ->orderBy('a.title', 'ASC')
+            ->getQuery();
+
+        return $query;
+    }
+
+    /**
+     * @return Query
+     */
+    function findBySymbol() {
+        $em = $this->getEntityManager();
+        $query = $em->createQueryBuilder()
+            ->select('a')
+            ->from('AppBundle:Node', 'a')
+            ->where('REGEXP(a.title, :regexp) = false')
+            ->andWhere('a.status = 1')
+            ->setParameter('regexp', '^[A-Za-z]')
+            ->orderBy('a.title', 'ASC')
+            ->getQuery();
+
+        return $query;
+    }
+
+    /**
+     * @param $letter
+     * @return Query
+     */
+    function findNodeByAlphabeticalOrder($letter) {
+        $em = $this->getEntityManager();
+        $query = $em->createQueryBuilder()
+            ->select('a')
+            ->from('AppBundle:Node', 'a')
+            ->where('a.title LIKE :title')
+            ->andWhere('a.status = 1')
+            ->setParameter('title', $letter . '%')
+            ->orderBy('a.title', 'ASC')
+            ->getQuery();
+
+        return $query;
+    }
 }
