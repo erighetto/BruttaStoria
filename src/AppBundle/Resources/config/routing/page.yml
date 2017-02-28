@@ -3,5 +3,5 @@ page_manifesto:
     defaults: { _controller: "AppBundle:Page:manifesto" }
 
 page_privacypolicy:
-    path:     /manifesto
+    path:     /privacy-and-cookies-policy
     defaults: { _controller: "AppBundle:Page:privacy_policy" }
