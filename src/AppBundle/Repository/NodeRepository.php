@@ -21,7 +21,7 @@ class NodeRepository extends EntityRepository
 
         $em = $this->getEntityManager();
         $qb = $em->createQueryBuilder();
-        $qb->select(array('DISTINCT n.id', 'n.title', 'n.slug', 'd.body'))
+        $qb->select(array('DISTINCT(n.id)', 'n.title', 'n.slug', 'd.body'))
             ->from('AppBundle:Node', 'n')
             ->innerJoin('AppBundle:Definition', 'd', Join::WITH, 'd.nodeId = n.id AND d.status = 1')
             ->where('n.status = 1')

@@ -28,3 +28,11 @@ services:
         - "@doctrine.orm.entity_manager"
       tags:
         - { name: "kernel.event_subscriber", priority: 100 }
+    memcached:
+        class: Memcached
+        calls:
+            - [ addServers, ["%memcache_hosts%"] ]
+    doctrine.cache.memcached:
+        class: Doctrine\Common\Cache\MemcachedCache
+        calls:
+            - [ setMemcached, [ "@memcached" ] ]
