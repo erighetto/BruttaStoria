@@ -1,7 +1,15 @@
 page_manifesto:
     path:     /manifesto
     defaults: { _controller: "AppBundle:Page:manifesto" }
+    options:
+        sitemap:
+            priority: 0.7
+            changefreq: weekly
 
 page_privacypolicy:
     path:     /privacy-and-cookies-policy
     defaults: { _controller: "AppBundle:Page:privacy_policy" }
+    options:
+        sitemap:
+            priority: 0.7
+            changefreq: weekly
