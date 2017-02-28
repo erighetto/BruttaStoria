@@ -91,7 +91,11 @@ class DictionaryController extends Controller
             ->findOneBySlug($slug);
 
         if (!$node) {
-            throw $this->createNotFoundException(
+            $second_chance = $em->getRepository('AppBundle:Node')
+                ->findOneBySlug(str_replace('_','-',$slug));
+            if ($second_chance) {
+                return $this->redirectToRoute('single_node', array('slug' => $second_chance->getSlug()), 301);
+            } else throw $this->createNotFoundException(
                 'No word found'
             );
         } else {
