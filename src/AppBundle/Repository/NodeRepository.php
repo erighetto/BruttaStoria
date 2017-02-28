@@ -87,12 +87,12 @@ class NodeRepository extends EntityRepository
     function findByWordLike ($word) {
         $em = $this->getEntityManager();
         $query = $em->createQueryBuilder()
-            ->select('a')
-            ->from('AppBundle:Node', 'a')
-            ->where('a.title LIKE :parola')
-            ->andWhere('a.status = 1')
+            ->select('n')
+            ->from('AppBundle:Node', 'n')
+            ->where('n.title LIKE :parola')
+            ->andWhere('n.status = 1')
             ->setParameter('parola', '%' . $word . '%')
-            ->orderBy('a.title', 'ASC')
+            ->orderBy('n.title', 'ASC')
             ->getQuery();
 
         return $query;
@@ -104,12 +104,12 @@ class NodeRepository extends EntityRepository
     function findBySymbol() {
         $em = $this->getEntityManager();
         $query = $em->createQueryBuilder()
-            ->select('a')
-            ->from('AppBundle:Node', 'a')
-            ->where('REGEXP(a.title, :regexp) = false')
-            ->andWhere('a.status = 1')
+            ->select('n')
+            ->from('AppBundle:Node', 'n')
+            ->where('REGEXP(n.title, :regexp) = false')
+            ->andWhere('n.status = 1')
             ->setParameter('regexp', '^[A-Za-z]')
-            ->orderBy('a.title', 'ASC')
+            ->orderBy('n.title', 'ASC')
             ->getQuery();
 
         return $query;
@@ -122,12 +122,12 @@ class NodeRepository extends EntityRepository
     function findNodeByAlphabeticalOrder($letter) {
         $em = $this->getEntityManager();
         $query = $em->createQueryBuilder()
-            ->select('a')
-            ->from('AppBundle:Node', 'a')
-            ->where('a.title LIKE :title')
-            ->andWhere('a.status = 1')
+            ->select('n')
+            ->from('AppBundle:Node', 'n')
+            ->where('n.title LIKE :title')
+            ->andWhere('n.status = 1')
             ->setParameter('title', $letter . '%')
-            ->orderBy('a.title', 'ASC')
+            ->orderBy('n.title', 'ASC')
             ->getQuery();
 
         return $query;
