@@ -46,7 +46,7 @@ class SitemapNodeSubscriber implements EventSubscriberInterface
      */
     public function registerNodesPages(SitemapPopulateEvent $event)
     {
-        $nodes = $this->manager->getRepository('AppBundle:Node')->findAll(array(), array('username' => 'ASC'));
+        $nodes = $this->manager->getRepository('AppBundle:Node')->findAll(array(), array('title' => 'ASC'));
         foreach ($nodes as $node) {
             $event->getUrlContainer()->addUrl(
                 new UrlConcrete(
