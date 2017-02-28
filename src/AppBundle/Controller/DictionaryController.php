@@ -12,7 +12,6 @@ class DictionaryController extends Controller
     public function list_nodesAction($letter, $page)
     {
         $em = $this->getDoctrine()->getManager();
-
         $query = $em->getRepository('AppBundle:Node')
             ->findByAlphabeticalOrder($letter);
 
@@ -31,7 +30,6 @@ class DictionaryController extends Controller
     public function list_bysymbol_nodesAction($page)
     {
         $em = $this->getDoctrine()->getManager();
-
         $query = $em->getRepository('AppBundle:Node')
             ->findBySymbol();
 
@@ -71,7 +69,6 @@ class DictionaryController extends Controller
     public function single_nodeAction($slug)
     {
         $em = $this->getDoctrine()->getManager();
-
         $node = $em->getRepository('AppBundle:Node')
             ->findOneBySlug($slug);
 
@@ -102,7 +99,6 @@ class DictionaryController extends Controller
     public function vote_nodeAction($id, $action)
     {
         $em = $this->getDoctrine()->getManager();
-
         $definition = $em->getRepository('AppBundle:Definition')
             ->find($id);
 
