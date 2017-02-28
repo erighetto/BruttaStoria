@@ -19,6 +19,7 @@ class DictionaryController extends Controller
             ->where('a.title LIKE :title')
             ->andWhere('a.status = 1')
             ->setParameter('title', $letter . '%')
+            ->orderBy('a.title', 'ASC')
             ->getQuery();
 
         $paginator = $this->get('knp_paginator');
@@ -43,6 +44,7 @@ class DictionaryController extends Controller
             ->where('REGEXP(a.title, :regexp) = false')
             ->andWhere('a.status = 1')
             ->setParameter('regexp', '^[A-Za-z]')
+            ->orderBy('a.title', 'ASC')
             ->getQuery();
 
         $paginator = $this->get('knp_paginator');
@@ -69,6 +71,7 @@ class DictionaryController extends Controller
             ->where('a.title LIKE :parola')
             ->andWhere('a.status = 1')
             ->setParameter('parola', '%' . $form['parola'] . '%')
+            ->orderBy('a.title', 'ASC')
             ->getQuery();
 
         $paginator = $this->get('knp_paginator');
