@@ -31,7 +31,7 @@
                 <td>{% if definition.updated %}{{ definition.updated|date('d-m-Y H:i:s') }}{% endif %}</td>
                 <td>{% if definition.created %}{{ definition.created|date('d-m-Y H:i:s') }}{% endif %}</td>
                 <td>
-                    <ul class="list-inline">
+                    <ul class="list-inline functional_footer_menu">
                         <li>
                             <a href="{{ path('definition_show', { 'id': definition.id }) }}">show</a>
                         </li>
@@ -49,7 +49,7 @@
         {{ knp_pagination_render(definitions) }}
     </div>
 
-    <ul class="list-inline">
+    <ul class="list-inline functional_footer_menu">
         <li>
             <a href="{{ path('definition_new') }}" class="btn btn-success">Create a new definition</a>
         </li>

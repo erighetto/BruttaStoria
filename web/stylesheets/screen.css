@@ -223,10 +223,6 @@ a.list-group-item-danger.active:hover, a.list-group-item-danger.active:focus {
   margin-top: 30px;
 }
 
-form #appbundle_definition,
-form #appbundle_hit,
-form #appbundle_node,
-form #appbundle_role,
-form #appbundle_user {
+.functional_footer_menu {
   margin-bottom: 60px;
 }
