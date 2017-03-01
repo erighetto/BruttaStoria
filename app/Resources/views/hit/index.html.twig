@@ -21,7 +21,7 @@
                 <td><a href="{{ path('hit_show', { 'id': hit.id }) }}">{{ hit.id }}</a></td>
                 <td>{{ hit.nodeId }}</td>
                 <td>{% if hit.visitTime %}{{ hit.visitTime|date('Y-m-d H:i:s') }}{% endif %}</td>
-                <td>{{ hit.referingUrl }}</td>
+                <td><a href="{{ hit.referingUrl|raw }}" target="_blank">{{ hit.referingUrl|truncate(100, '...') }}</td>
                 <td>{{ hit.hitRemoteAddr }}</td>
                 <td>{{ hit.hitUserAgent }}</td>
                 <td>
