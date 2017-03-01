@@ -68,6 +68,8 @@ doctrine:
         dql:
             string_functions:
                 regexp: DoctrineExtensions\Query\Mysql\Regexp
+                datediff: DoctrineExtensions\Query\Mysql\DateDiff
+                now: DoctrineExtensions\Query\Mysql\Now
 
 # Swiftmailer Configuration
 swiftmailer:

@@ -14,10 +14,11 @@ web_profiler:
 monolog:
     handlers:
         main:
-            type: stream
+            type: rotating_file
             path: "%kernel.logs_dir%/%kernel.environment%.log"
             level: debug
             channels: [!event]
+            max_files: 10
         console:
             type:   console
             channels: [!event, !doctrine]
@@ -29,6 +30,7 @@ monolog:
         #chromephp:
         #    type:   chromephp
         #    level:  info
+
 
 #swiftmailer:
 #    delivery_addresses: ['me@example.com']
