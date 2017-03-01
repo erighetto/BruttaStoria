@@ -470,11 +470,13 @@ class User implements UserInterface, \Serializable
      */
     public function getRoles()
     {
-        if ($this->roleId == 1)
+        $role = $this->getRoleId();
+        if ($role == 1)
+            $role = 'ROLE_ADMIN';
+        elseif ($role = 2)
             $role = 'ROLE_USER';
         else
-            $role = 'ROLE_ADMIN';
-
+            $role = 'IS_AUTHENTICATED_ANONYMOUSLY';
         return array($role);
     }
 
