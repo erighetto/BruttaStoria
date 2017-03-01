@@ -9,7 +9,7 @@
     {% for entity in definitions %}
         <div class="panel panel-default">
             <div class="panel-heading">
-                di <strong>{{ entity.u_name }}</strong> {% if entity.u_origin %}da <strong>{{ entity.u_origin }}</strong>{% endif %}
+                di <strong>{{ entity.u_name|raw }}</strong> {% if entity.u_origin %}da <strong>{{ entity.u_origin|raw }}</strong>{% endif %}
             </div>
             <div class="panel-body">
                 <article>
