@@ -19,11 +19,11 @@
             </tr>
             <tr>
                 <th>Body</th>
-                <td>{{ definition.body }}</td>
+                <td>{{ definition.body|raw }}</td>
             </tr>
             <tr>
                 <th>Extra Info</th>
-                <td>{{ definition.extraInfo }}</td>
+                <td>{{ definition.extraInfo|raw }}</td>
             </tr>
             <tr>
                 <th>Status</th>
@@ -35,11 +35,11 @@
             </tr>
             <tr>
                 <th>Updated</th>
-                <td>{% if definition.updated %}{{ definition.updated|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{% if definition.updated %}{{ definition.updated|date('d-m-Y H:i:s') }}{% endif %}</td>
             </tr>
             <tr>
                 <th>Created</th>
-                <td>{% if definition.created %}{{ definition.created|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{% if definition.created %}{{ definition.created|date('d-m-Y H:i:s') }}{% endif %}</td>
             </tr>
         </tbody>
     </table>

@@ -26,8 +26,8 @@
                 <td>{% if node.status %}Yes{% else %}No{% endif %}</td>
                 <td>{% if node.promote %}Yes{% else %}No{% endif %}</td>
                 <td>{% if node.sticky %}Yes{% else %}No{% endif %}</td>
-                <td>{% if node.updated %}{{ node.updated|date('Y-m-d H:i:s') }}{% endif %}</td>
-                <td>{% if node.created %}{{ node.created|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{% if node.updated %}{{ node.updated|date('d-m-Y H:i:s') }}{% endif %}</td>
+                <td>{% if node.created %}{{ node.created|date('d-m-Y H:i:s') }}{% endif %}</td>
                 <td>
                     <ul class="list-inline">
                         <li>

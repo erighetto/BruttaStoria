@@ -24,12 +24,12 @@
                 <td><a href="{{ path('definition_show', { 'id': definition.id }) }}">{{ definition.id }}</a></td>
                 <td>{{ definition.nodeId }}</td>
                 <td>{{ definition.userId }}</td>
-                <td>{{ definition.body }}</td>
-                <td>{{ definition.extraInfo }}</td>
+                <td>{{ definition.body|raw }}</td>
+                <td>{{ definition.extraInfo|raw }}</td>
                 <td>{% if definition.status %}Yes{% else %}No{% endif %}</td>
                 <td>{{ definition.poll }}</td>
-                <td>{% if definition.updated %}{{ definition.updated|date('Y-m-d H:i:s') }}{% endif %}</td>
-                <td>{% if definition.created %}{{ definition.created|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{% if definition.updated %}{{ definition.updated|date('d-m-Y H:i:s') }}{% endif %}</td>
+                <td>{% if definition.created %}{{ definition.created|date('d-m-Y H:i:s') }}{% endif %}</td>
                 <td>
                     <ul class="list-inline">
                         <li>
