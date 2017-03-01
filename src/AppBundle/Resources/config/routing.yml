@@ -29,7 +29,6 @@ app_dictionary:
 security_login:
     path: /security/login
     defaults: { _controller: "AppBundle:Security:login"}
-    methods:  GET
 
 default_index:
     path: /
