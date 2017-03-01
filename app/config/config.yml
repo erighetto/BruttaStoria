@@ -40,7 +40,8 @@ twig:
     strict_variables: "%kernel.debug%"
     globals:
         fulltextSearch: "@app.fulltextsearch"
-
+    form:
+        resources: ['bootstrap_3_layout.html.twig']
 # Doctrine Configuration
 doctrine:
     dbal:
