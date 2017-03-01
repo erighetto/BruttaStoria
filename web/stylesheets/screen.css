@@ -1,56 +1,46 @@
-/* line 14, ../sass/screen.scss */
 .navbar-inverse .badge {
   background-color: #fff;
   color: #2780E3;
 }
 
-/* line 25, ../sass/screen.scss */
 body {
   font-family: 'Source Sans Pro', sans-serif;
   -webkit-font-smoothing: antialiased;
 }
 
-/* line 30, ../sass/screen.scss */
 .text-primary,
 .text-primary:hover {
   color: #2780E3;
 }
 
-/* line 35, ../sass/screen.scss */
 .text-success,
 .text-success:hover {
   color: #3FB618;
 }
 
-/* line 40, ../sass/screen.scss */
 .text-danger,
 .text-danger:hover {
   color: #FF0039;
 }
 
-/* line 45, ../sass/screen.scss */
 .text-warning,
 .text-warning:hover {
   color: #FF7518;
 }
 
-/* line 50, ../sass/screen.scss */
 .text-info,
 .text-info:hover {
   color: #9954BB;
 }
 
-/* line 60, ../sass/screen.scss */
 table a:not(.btn),
 .table a:not(.btn) {
   text-decoration: underline;
 }
-/* line 64, ../sass/screen.scss */
 table .dropdown-menu a,
 .table .dropdown-menu a {
   text-decoration: none;
 }
-/* line 68, ../sass/screen.scss */
 table .success,
 table .warning,
 table .danger,
@@ -61,7 +51,6 @@ table .info,
 .table .info {
   color: #fff;
 }
-/* line 74, ../sass/screen.scss */
 table .success a,
 table .warning a,
 table .danger a,
@@ -73,7 +62,6 @@ table .info a,
   color: #fff;
 }
 
-/* line 84, ../sass/screen.scss */
 .has-warning .help-block,
 .has-warning .control-label,
 .has-warning .radio,
@@ -83,14 +71,12 @@ table .info a,
 .has-warning .form-control-feedback {
   color: #FF7518;
 }
-/* line 98, ../sass/screen.scss */
 .has-warning .form-control,
 .has-warning .form-control:focus,
 .has-warning .input-group-addon {
   border: 1px solid #FF7518;
 }
 
-/* line 106, ../sass/screen.scss */
 .has-error .help-block,
 .has-error .control-label,
 .has-error .radio,
@@ -100,14 +86,12 @@ table .info a,
 .has-error .form-control-feedback {
   color: #FF0039;
 }
-/* line 120, ../sass/screen.scss */
 .has-error .form-control,
 .has-error .form-control:focus,
 .has-error .input-group-addon {
   border: 1px solid #FF0039;
 }
 
-/* line 128, ../sass/screen.scss */
 .has-success .help-block,
 .has-success .control-label,
 .has-success .radio,
@@ -117,115 +101,93 @@ table .info a,
 .has-success .form-control-feedback {
   color: #3FB618;
 }
-/* line 142, ../sass/screen.scss */
 .has-success .form-control,
 .has-success .form-control:focus,
 .has-success .input-group-addon {
   border: 1px solid #3FB618;
 }
 
-/* line 153, ../sass/screen.scss */
 .nav-pills > li > a {
   border-radius: 0;
 }
 
-/* line 160, ../sass/screen.scss */
 .dropdown-menu > li > a:hover, .dropdown-menu > li > a:focus {
   background-image: none;
 }
 
-/* line 168, ../sass/screen.scss */
 .close {
   text-decoration: none;
   text-shadow: none;
   opacity: 0.4;
 }
-/* line 173, ../sass/screen.scss */
 .close:hover, .close:focus {
   opacity: 1;
 }
 
-/* line 179, ../sass/screen.scss */
 .alert {
   border: none;
 }
-/* line 182, ../sass/screen.scss */
 .alert .alert-link {
   text-decoration: underline;
   color: #fff;
 }
 
-/* line 188, ../sass/screen.scss */
 .label {
   border-radius: 0;
 }
 
-/* line 194, ../sass/screen.scss */
 .progress {
   height: 8px;
   -moz-box-shadow: none;
   -webkit-box-shadow: none;
   box-shadow: none;
 }
-/* line 197, ../sass/screen.scss */
 .progress .progress-bar {
   font-size: 8px;
   line-height: 8px;
 }
 
-/* line 206, ../sass/screen.scss */
 .panel-heading, .panel-footer {
   border-top-right-radius: 0;
   border-top-left-radius: 0;
 }
-/* line 213, ../sass/screen.scss */
 .panel-default .close {
   color: #333333;
 }
 
-/* line 222, ../sass/screen.scss */
 a.list-group-item-success.active {
   background-color: #3FB618;
 }
-/* line 226, ../sass/screen.scss */
 a.list-group-item-success.active:hover, a.list-group-item-success.active:focus {
   background-color: #379f15;
 }
-/* line 233, ../sass/screen.scss */
 a.list-group-item-warning.active {
   background-color: #FF7518;
 }
-/* line 237, ../sass/screen.scss */
 a.list-group-item-warning.active:hover, a.list-group-item-warning.active:focus {
   background-color: #fe6600;
 }
-/* line 244, ../sass/screen.scss */
 a.list-group-item-danger.active {
   background-color: #FF0039;
 }
-/* line 248, ../sass/screen.scss */
 a.list-group-item-danger.active:hover, a.list-group-item-danger.active:focus {
   background-color: #e60033;
 }
 
-/* line 256, ../sass/screen.scss */
 .modal .close {
   color: #333333;
 }
 
-/* line 261, ../sass/screen.scss */
 .popover {
   color: #333333;
 }
 
-/* line 1, ../sass/_custom.scss */
 .jumbotron {
   background: url("../images/brutta_storia_header.jpg");
   background-repeat: no-repeat;
   background-size: cover;
   min-height: 30vw;
 }
-/* line 6, ../sass/_custom.scss */
 .jumbotron h1 {
   background: rgba(255, 255, 255, 0.6);
   text-align: center;
@@ -234,36 +196,37 @@ a.list-group-item-danger.active:hover, a.list-group-item-danger.active:focus {
   margin-bottom: 0;
 }
 
-/* line 16, ../sass/_custom.scss */
 #sidebar aside {
   margin: 60px 0;
 }
-/* line 18, ../sass/_custom.scss */
 #sidebar aside:first-of-type {
   margin: 0 0 60px 0;
 }
-/* line 20, ../sass/_custom.scss */
 #sidebar aside:first-of-type h3 {
   margin-top: 0;
   padding-top: 0;
 }
 
-/* line 30, ../sass/_custom.scss */
 #dizionario header a {
   padding: 0 0.2em 0 0;
 }
 
-/* line 38, ../sass/_custom.scss */
 #singolo-lemma__detail article header {
   font-style: italic;
   text-align: right;
   margin-bottom: 30px;
 }
-/* line 43, ../sass/_custom.scss */
 #singolo-lemma__detail article blockquote {
   margin: 30px 0 0 0;
 }
-/* line 46, ../sass/_custom.scss */
 #singolo-lemma__detail article footer {
   margin-top: 30px;
+}
+
+form #appbundle_definition,
+form #appbundle_hit,
+form #appbundle_node,
+form #appbundle_role,
+form #appbundle_user {
+  margin-bottom: 60px;
 }

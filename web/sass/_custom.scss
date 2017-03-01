@@ -48,3 +48,13 @@
     }
   }
 }
+
+form {
+  #appbundle_definition,
+  #appbundle_hit,
+  #appbundle_node,
+  #appbundle_role,
+  #appbundle_user {
+    margin-bottom: ($grid-gutter-width * 2);
+  }
+}
