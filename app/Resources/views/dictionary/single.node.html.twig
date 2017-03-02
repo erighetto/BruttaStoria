@@ -2,7 +2,7 @@
 
 {% block title %}{{ node.title }}{% endblock %}
 
-{% block canonical %}<link href="{{ url('single_node', { 'slug': node.slug }) }}" rel="canonical">{% endblock %}
+{% block canonical %}<link href="{{ url('single_node', { 'slug': node.slug }, true) }}" rel="canonical">{% endblock %}
 
 {% block body %}
     <h1>{{ node.title }}</h1>
