@@ -2,6 +2,8 @@
 
 {% block title %}{{ node.title }}{% endblock %}
 
+{% block canonical %}<link href="{{ url('single_node', { 'slug': node.slug }, true) }}" rel="canonical">{% endblock %}
+
 {% block body %}
     <h1>{{ node.title }}</h1>
 
@@ -9,7 +11,7 @@
     {% for entity in definitions %}
         <div class="panel panel-default">
             <div class="panel-heading">
-                di {{ entity.u_name }} da {{ entity.u_origin }}
+                di <strong>{{ entity.u_name|raw }}</strong> {% if entity.u_origin %}da <strong>{{ entity.u_origin|raw }}</strong>{% endif %}
             </div>
             <div class="panel-body">
                 <article>
@@ -20,7 +22,7 @@
                     {{ entity.d_body|raw }}
                     {% if entity.d_extraInfo %}
                     <blockquote>
-                        {{ entity.d_extraInfo|raw|nl2br }}
+                        {{ entity.d_extraInfo|raw }}
                     </blockquote>
                     {% endif %}
                     <footer>

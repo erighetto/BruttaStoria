@@ -5,6 +5,7 @@ namespace AppBundle\Form;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 
 class DefinitionType extends AbstractType
 {
@@ -13,9 +14,27 @@ class DefinitionType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('nodeId')->add('userId')->add('body')->add('extraInfo')->add('status')->add('poll')->add('updated')->add('created')->add('nodes')->add('users')        ;
+        $builder
+            ->add('nodeId')
+            ->add('userId')
+            ->add('body', TextareaType::class, array(
+                'attr' => array(
+                    'class' => 'tinymce',
+                    'data-theme' => 'bbcode' // Skip it if you want to use default theme
+                )
+            ))
+            ->add('extraInfo', TextareaType::class, array(
+                'attr' => array(
+                    'class' => 'tinymce',
+                    'data-theme' => 'bbcode' // Skip it if you want to use default theme
+                )
+            ))
+            ->add('status')
+            ->add('poll')
+            ->add('updated')
+            ->add('created');
     }
-    
+
     /**
      * {@inheritdoc}
      */

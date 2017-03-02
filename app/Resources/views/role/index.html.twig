@@ -19,7 +19,7 @@
                 <td>{{ role.role }}</td>
                 <td>{% if role.isAdmin %}Yes{% else %}No{% endif %}</td>
                 <td>
-                    <ul class="list-inline">
+                    <ul class="list-inline functional_footer_menu">
                         <li>
                             <a href="{{ path('role_show', { 'id': role.id }) }}">show</a>
                         </li>
@@ -33,7 +33,7 @@
         </tbody>
     </table>
 
-    <ul class="list-inline">
+    <ul class="list-inline functional_footer_menu">
         <li>
             <a href="{{ path('role_new') }}" class="btn btn-success">Create a new role</a>
         </li>

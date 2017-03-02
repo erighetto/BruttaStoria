@@ -17,6 +17,9 @@ class AppKernel extends Kernel
             new Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle(),
             new AppBundle\AppBundle(),
             new Knp\Bundle\PaginatorBundle\KnpPaginatorBundle(),
+            new Presta\SitemapBundle\PrestaSitemapBundle(),
+            new Doctrine\Bundle\DoctrineCacheBundle\DoctrineCacheBundle(),
+            new Stfalcon\Bundle\TinymceBundle\StfalconTinymceBundle()
         ];
 
         if (in_array($this->getEnvironment(), ['dev', 'test'], true)) {

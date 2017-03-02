@@ -12,8 +12,8 @@ class DefaultController extends Controller
     public function indexAction()
     {
         $em = $this->getDoctrine()->getManager();
-        $sticked = $em->getRepository('AppBundle:Node')->topTenSticked();
-        $promoted = $em->getRepository('AppBundle:Node')->topTenPromoted();
+        $sticked = $em->getRepository('AppBundle:Node')->findTopTenSticked();
+        $promoted = $em->getRepository('AppBundle:Node')->findTopTenPromoted();
 
         return $this->render('default/index.html.twig', [
             'sticked_nodes'=> $sticked,

@@ -28,9 +28,9 @@ security:
         - { path: /security/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/dictionary, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/page, roles: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/definition, roles: ROLE_USER }
-        - { path: ^/hit, roles: ROLE_USER }
-        - { path: ^/node, roles: ROLE_USER }
-        - { path: ^/role, roles: ROLE_USER }
-        - { path: ^/user, roles: ROLE_USER }
+        - { path: ^/definition, roles: ROLE_ADMIN }
+        - { path: ^/hit, roles: ROLE_ADMIN }
+        - { path: ^/node, roles: ROLE_ADMIN }
+        - { path: ^/role, roles: ROLE_ADMIN }
+        - { path: ^/user, roles: ROLE_ADMIN }
         - { path: ^/.*, role: IS_AUTHENTICATED_ANONYMOUSLY }

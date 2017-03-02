@@ -31,16 +31,16 @@
             </tr>
             <tr>
                 <th>Updated</th>
-                <td>{% if node.updated %}{{ node.updated|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{% if node.updated %}{{ node.updated|date('d-m-Y H:i:s') }}{% endif %}</td>
             </tr>
             <tr>
                 <th>Created</th>
-                <td>{% if node.created %}{{ node.created|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{% if node.created %}{{ node.created|date('d-m-Y H:i:s') }}{% endif %}</td>
             </tr>
         </tbody>
     </table>
 
-    <ul class="list-inline">
+    <ul class="list-inline functional_footer_menu">
         <li>
             <a href="{{ path('node_index') }}" class="btn btn-primary">Back to the list</a>
         </li>

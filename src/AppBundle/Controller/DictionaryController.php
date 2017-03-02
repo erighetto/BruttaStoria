@@ -9,19 +9,13 @@ use Symfony\Component\HttpFoundation\Request;
 
 class DictionaryController extends Controller
 {
-    public function list_nodesAction($letter,$page)
+    public function list_nodesAction($letter, $page)
     {
-        $em    = $this->getDoctrine()->getManager();
+        $em = $this->getDoctrine()->getManager();
+        $query = $em->getRepository('AppBundle:Node')
+            ->findByAlphabeticalOrder($letter);
 
-        $query = $em->createQueryBuilder()
-            ->select('a')
-            ->from('AppBundle:Node','a')
-            ->where('a.title LIKE :title')
-            ->andWhere('a.status = 1')
-            ->setParameter('title', $letter.'%')
-            ->getQuery();
-
-        $paginator  = $this->get('knp_paginator');
+        $paginator = $this->get('knp_paginator');
         $pagination = $paginator->paginate(
             $query, /* query NOT result */
             $page, /*page number*/
@@ -35,17 +29,11 @@ class DictionaryController extends Controller
 
     public function list_bysymbol_nodesAction($page)
     {
-        $em    = $this->getDoctrine()->getManager();
+        $em = $this->getDoctrine()->getManager();
+        $query = $em->getRepository('AppBundle:Node')
+            ->findBySymbol();
 
-        $query = $em->createQueryBuilder()
-            ->select('a')
-            ->from('AppBundle:Node','a')
-            ->where('REGEXP(a.title, :regexp) = false')
-            ->andWhere('a.status = 1')
-            ->setParameter('regexp', '^[A-Za-z]')
-            ->getQuery();
-
-        $paginator  = $this->get('knp_paginator');
+        $paginator = $this->get('knp_paginator');
         $pagination = $paginator->paginate(
             $query, /* query NOT result */
             $page, /*page number*/
@@ -57,21 +45,16 @@ class DictionaryController extends Controller
         ));
     }
 
-    public function search_nodeAction(Request $request)
+    public function search_nodesAction(Request $request)
     {
 
         $form = $request->get('appbundle_node');
 
         $em = $this->getDoctrine()->getManager();
-        $query = $em->createQueryBuilder()
-            ->select('a')
-            ->from('AppBundle:Node','a')
-            ->where('a.title LIKE :parola')
-            ->andWhere('a.status = 1')
-            ->setParameter('parola', '%'.$form['parola'].'%')
-            ->getQuery();
+        $query = $em->getRepository('AppBundle:Node')
+            ->findByWordLike($form['parola']);
 
-        $paginator  = $this->get('knp_paginator');
+        $paginator = $this->get('knp_paginator');
         $pagination = $paginator->paginate(
             $query, /* query NOT result */
             1, /*page number*/
@@ -86,18 +69,21 @@ class DictionaryController extends Controller
     public function single_nodeAction($slug)
     {
         $em = $this->getDoctrine()->getManager();
-
         $node = $em->getRepository('AppBundle:Node')
             ->findOneBySlug($slug);
 
         if (!$node) {
-            throw $this->createNotFoundException(
+            $second_chance = $em->getRepository('AppBundle:Node')
+                ->findOneBySlug(str_replace('_', '-', $slug));
+            if ($second_chance) {
+                return $this->redirectToRoute('single_node', array('slug' => $second_chance->getSlug()), 301);
+            } else throw $this->createNotFoundException(
                 'No word found'
             );
         } else {
             $id = $node->getId();
-            $definitions = $em->getRepository('AppBundle:Definition')->relatedDefinitions($id);
-            $related = $em->getRepository('AppBundle:Node')->relatedNode($id);
+            $definitions = $em->getRepository('AppBundle:Definition')->findRelatedDefinitions($id);
+            $related = $em->getRepository('AppBundle:Node')->findRelatedNode($id);
             $logger = $this->get('app.hitlogger');
             $logger->writeRecord($id);
         }
@@ -110,26 +96,29 @@ class DictionaryController extends Controller
 
     }
 
-    public function vote_nodeAction($id,$action)
+    public function vote_nodeAction($id, $action)
     {
         $em = $this->getDoctrine()->getManager();
-
         $definition = $em->getRepository('AppBundle:Definition')
             ->find($id);
 
         $actual = $definition->getPoll();
 
-        if ($action=="up") { $voting =  $actual+1; } elseif ($action=="down") { $voting =  $actual-1; }
+        if ($action == "up") {
+            $voting = $actual + 1;
+        } elseif ($action == "down") {
+            $voting = $actual - 1;
+        }
 
         $definition->setPoll($voting);
         $em->flush();
 
 
         $cookieGuest = array(
-            'name'  => 'bs-votazione',
+            'name' => 'bs-votazione',
             'value' => $id,
-            'path'  => $this->get('router')->generate('vote_node', array('id' => $id,'action' => $action)),
-            'time'  => time() + 3600 * 24 * 7
+            'path' => $this->get('router')->generate('vote_node', array('id' => $id, 'action' => $action)),
+            'time' => time() + 3600 * 24 * 7
         );
 
         $cookie = new Cookie($cookieGuest['name'], $cookieGuest['value'], $cookieGuest['time'], $cookieGuest['path']);

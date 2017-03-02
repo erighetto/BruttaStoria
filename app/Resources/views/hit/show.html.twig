@@ -15,7 +15,7 @@
             </tr>
             <tr>
                 <th>Visittime</th>
-                <td>{% if hit.visitTime %}{{ hit.visitTime|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{% if hit.visitTime %}{{ hit.visitTime|date('d-m-Y H:i:s') }}{% endif %}</td>
             </tr>
             <tr>
                 <th>Referingurl</th>
@@ -32,7 +32,7 @@
         </tbody>
     </table>
 
-    <ul class="list-inline">
+    <ul class="list-inline functional_footer_menu">
         <li>
             <a href="{{ path('hit_index') }}" class="btn btn-primary">Back to the list</a>
         </li>

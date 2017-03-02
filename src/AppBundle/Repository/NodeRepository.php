@@ -16,12 +16,12 @@ class NodeRepository extends EntityRepository
     /**
      * @return array
      */
-    function topTenSticked()
+    function findTopTenSticked()
     {
 
         $em = $this->getEntityManager();
         $qb = $em->createQueryBuilder();
-        $qb->select(array('DISTINCT n.id', 'n.title', 'n.slug', 'd.body'))
+        $qb->select(array('DISTINCT(n.id)', 'n.title', 'n.slug', 'd.body'))
             ->from('AppBundle:Node', 'n')
             ->innerJoin('AppBundle:Definition', 'd', Join::WITH, 'd.nodeId = n.id AND d.status = 1')
             ->where('n.status = 1')
@@ -39,12 +39,12 @@ class NodeRepository extends EntityRepository
     /**
      * @return array
      */
-    function topTenPromoted()
+    function findTopTenPromoted()
     {
 
         $em = $this->getEntityManager();
         $qb = $em->createQueryBuilder();
-        $qb->select(array('n.id', 'n.title', 'n.slug', 'd.body'))
+        $qb->select(array('DISTINCT(n.id)', 'n.title', 'n.slug', 'd.body', 'n.updated'))
             ->from('AppBundle:Node', 'n')
             ->innerJoin('AppBundle:Definition', 'd', Join::WITH, 'd.nodeId = n.id AND d.status = 1')
             ->where('n.status = 1')
@@ -62,7 +62,7 @@ class NodeRepository extends EntityRepository
     /**
      * @return array
      */
-    function relatedNode($nodeId)
+    function findRelatedNode($nodeId)
     {
 
         $em = $this->getEntityManager();
@@ -78,5 +78,58 @@ class NodeRepository extends EntityRepository
         $results = $query->getResult(Query::HYDRATE_SCALAR);
 
         return $results;
+    }
+
+    /**
+     * @param $word
+     * @return Query
+     */
+    function findByWordLike($word) {
+        $em = $this->getEntityManager();
+        $query = $em->createQueryBuilder()
+            ->select('n')
+            ->from('AppBundle:Node', 'n')
+            ->where('n.title LIKE :parola')
+            ->andWhere('n.status = 1')
+            ->setParameter('parola', '%' . $word . '%')
+            ->orderBy('n.title', 'ASC')
+            ->getQuery();
+
+        return $query;
+    }
+
+    /**
+     * @return Query
+     */
+    function findBySymbol() {
+        $em = $this->getEntityManager();
+        $query = $em->createQueryBuilder()
+            ->select('n')
+            ->from('AppBundle:Node', 'n')
+            ->where('REGEXP(n.title, :regexp) = false')
+            ->andWhere('n.status = 1')
+            ->setParameter('regexp', '^[A-Za-z]')
+            ->orderBy('n.title', 'ASC')
+            ->getQuery();
+
+        return $query;
+    }
+
+    /**
+     * @param $letter
+     * @return Query
+     */
+    function findByAlphabeticalOrder($letter) {
+        $em = $this->getEntityManager();
+        $query = $em->createQueryBuilder()
+            ->select('n')
+            ->from('AppBundle:Node', 'n')
+            ->where('n.title LIKE :title')
+            ->andWhere('n.status = 1')
+            ->setParameter('title', $letter . '%')
+            ->orderBy('n.title', 'ASC')
+            ->getQuery();
+
+        return $query;
     }
 }

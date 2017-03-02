@@ -18,7 +18,7 @@ class DefinitionRepository extends EntityRepository
      * @param $node_id
      * @return array
      */
-    function relatedDefinitions($node_id)
+    function findRelatedDefinitions($node_id)
     {
 
         $em = $this->getEntityManager();
