@@ -10,7 +10,7 @@
             <div class="row node-container">
                 {% for column in row %}
                     <div class="col-md-3 node-container__item">
-                        <a href="{{ path('single_node', { 'slug': column.slug }) }}">{{ column.title }}</a>
+                        <a href="{{ url('single_node', { 'slug': column.slug }, true) }}">{{ column.title }}</a>
                     </div>
                 {% endfor %}
             </div>

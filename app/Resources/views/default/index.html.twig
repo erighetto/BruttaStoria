@@ -10,7 +10,7 @@
         <div class="panel-body">
             <ul>
             {% for node in sticked_nodes %}
-                    <li><a href="{{ path('single_node', { 'slug': node.slug }) }}">{{ node.title }}</a>
+                    <li><a href="{{ url('single_node', { 'slug': node.slug }, true) }}">{{ node.title }}</a>
                         {{ node.body|striptags|truncate(200, '...') }}</li>
             {% endfor %}
             </ul>
@@ -24,7 +24,7 @@
         <div class="panel-body">
             <ul>
                 {% for node in promoted_nodes %}
-                    <li><a href="{{ path('single_node', { 'slug': node.slug }) }}">{{ node.title }}</a>
+                    <li><a href="{{ url('single_node', { 'slug': node.slug }, true) }}">{{ node.title }}</a>
                         {{ node.body|striptags|truncate(200, '...') }}</li>
                 {% endfor %}
             </ul>

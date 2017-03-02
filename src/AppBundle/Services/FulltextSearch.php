@@ -5,6 +5,7 @@ namespace AppBundle\Services;
 use Symfony\Component\Form\FormFactory;
 use AppBundle\Form\FulltextSearchType;
 use Symfony\Component\Routing\Router;
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 /**
  * Class FulltextSearch
@@ -39,7 +40,7 @@ class FulltextSearch
     public function getSearchForm()
     {
         $form = $this->formFactory->createBuilder(FulltextSearchType::class)
-            ->setAction($this->router->generate('search_nodes'))
+            ->setAction($this->router->generate('search_nodes',[],UrlGeneratorInterface::ABSOLUTE_URL))
             ->getForm();
 
         return $form->createView();
