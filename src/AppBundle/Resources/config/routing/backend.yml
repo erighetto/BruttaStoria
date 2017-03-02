@@ -9,7 +9,7 @@ backend_new_node:
     methods:  [GET, POST]
 
 backend_new_definition:
-    path:     /new_definition
+    path:     /{node_id}/new_definition
     defaults: { _controller: "AppBundle:Backend:new_definition" }
     methods:  [GET, POST]
 

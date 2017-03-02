@@ -31,8 +31,9 @@ class BackendController extends Controller
 
     public function new_nodeAction(Request $request)
     {
+        $user = $this->get('security.token_storage')->getToken()->getUser();
         $node = new Node();
-        $form = $this->createForm('AppBundle\Form\NodeType', $node);
+        $form = $this->createForm('AppBundle\Form\NodeType', $node, ['role' => $user->getRoles()]);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -40,7 +41,7 @@ class BackendController extends Controller
             $em->persist($node);
             $em->flush($node);
 
-            return $this->redirectToRoute('page_thankyou');
+            return $this->redirectToRoute('backend_new_definition', array('node_id' => $node->getId()));
         }
         return $this->render('backend/new.node.html.twig', array(
             'node' => $node,
@@ -50,8 +51,9 @@ class BackendController extends Controller
 
     public function new_definitionAction(Request $request)
     {
+        $user = $this->get('security.token_storage')->getToken()->getUser();
         $definition = new Definition();
-        $form = $this->createForm('AppBundle\Form\DefinitionType', $definition);
+        $form = $this->createForm('AppBundle\Form\DefinitionType', $definition, ['role' => $user->getRoles()]);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -78,7 +80,7 @@ class BackendController extends Controller
     public function profile_editAction(Request $request)
     {
         $user = $this->get('security.token_storage')->getToken()->getUser();
-        $editForm = $this->createForm('AppBundle\Form\UserType', $user);
+        $editForm = $this->createForm('AppBundle\Form\UserType', $user, ['role' => $user->getRoles()]);
         $editForm->handleRequest($request);
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {

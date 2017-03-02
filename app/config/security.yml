@@ -23,6 +23,9 @@ security:
             form_login:
                 login_path: /security/login
                 check_path: /security/login
+            logout:
+                path:   /security/logout
+                target: /
 
     access_control:
         - { path: /security/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }

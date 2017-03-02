@@ -1,7 +1,9 @@
 {% extends 'base.html.twig' %}
 
+{% block title %}Inserisci una nuova parola{% endblock %}
+
 {% block body %}
-    <h1>Inserisci il tuo vocabolo</h1>
+    <h1>Inserisci una nuova parola</h1>
     <ul>
     <li>L'Italia ti legge, quindi dacci informazioni sufficienti per comprendere il tuo lemma
     </li>
@@ -13,7 +15,7 @@
 
     {{ form_start(form) }}
     {{ form_widget(form) }}
-    <input type="submit" value="Create" />
+    <input type="submit" class="btn btn-success" value="Inserisci">
     {{ form_end(form) }}
 
 {% endblock %}
