@@ -28,6 +28,7 @@ security:
         - { path: /security/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/dictionary, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/page, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/backend, roles: ROLE_USER }
         - { path: ^/definition, roles: ROLE_ADMIN }
         - { path: ^/hit, roles: ROLE_ADMIN }
         - { path: ^/node, roles: ROLE_ADMIN }

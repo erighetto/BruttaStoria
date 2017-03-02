@@ -1,0 +1,19 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Inserisci il tuo vocabolo</h1>
+    <ul>
+    <li>L'Italia ti legge, quindi dacci informazioni sufficienti per comprendere il tuo lemma
+    </li>
+    <li>Accettiamo la forma della definizione, dell'essay, del racconto
+    </li>
+    <li>Non nominare mai i tuoi amici. Usa soprannomi, nomi inventati</li>
+    </ul>
+
+
+    {{ form_start(form) }}
+    {{ form_widget(form) }}
+    <input type="submit" value="Create" />
+    {{ form_end(form) }}
+
+{% endblock %}

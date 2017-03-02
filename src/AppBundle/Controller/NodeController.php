@@ -59,20 +59,6 @@ class NodeController extends Controller
     }
 
     /**
-     * Finds and displays a node entity.
-     *
-     */
-    public function showAction(Node $node)
-    {
-        $deleteForm = $this->createDeleteForm($node);
-
-        return $this->render('node/show.html.twig', array(
-            'node' => $node,
-            'delete_form' => $deleteForm->createView(),
-        ));
-    }
-
-    /**
      * Displays a form to edit an existing node entity.
      *
      */

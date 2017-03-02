@@ -1,0 +1,28 @@
+backend_new_user:
+    path:     /new_user
+    defaults: { _controller: "AppBundle:Backend:new_user" }
+    methods:  [GET, POST]
+
+backend_new_node:
+    path:     /new_node
+    defaults: { _controller: "AppBundle:Backend:new_node" }
+    methods:  [GET, POST]
+
+backend_new_definition:
+    path:     /new_definition
+    defaults: { _controller: "AppBundle:Backend:new_definition" }
+    methods:  [GET, POST]
+
+backend_profile_view:
+    path:     /profile/view
+    defaults: { _controller: "AppBundle:Backend:profile_view" }
+
+backend_profile_edit:
+    path:     /profile/edit
+    defaults: { _controller: "AppBundle:Backend:profile_edit" }
+    methods:  [GET, POST]
+
+backend_profile_reset:
+    path:     /profile/reset
+    defaults: { _controller: "AppBundle:Backend:profile_reset" }
+    methods:  [GET, POST]
