@@ -36,3 +36,5 @@ services:
         class: Doctrine\Common\Cache\MemcachedCache
         calls:
             - [ setMemcached, [ "@memcached" ] ]
+    app.slugmanager:
+        class: AppBundle\Services\SlugManager

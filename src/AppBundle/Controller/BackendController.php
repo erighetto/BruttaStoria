@@ -36,6 +36,8 @@ class BackendController extends Controller
         $form = $this->createForm('AppBundle\Form\NodeType', $node, ['role' => $user->getRoles()]);
         $form->handleRequest($request);
 
+        $slug = $this->get('app.slugmanager')->in($node->getSlug());
+
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
             $em->persist($node);
