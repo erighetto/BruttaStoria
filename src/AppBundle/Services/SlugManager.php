@@ -3,6 +3,9 @@
 
 namespace AppBundle\Services;
 use Cocur\Slugify\Slugify;
+use Doctrine\ORM\EntityManager;
+use AppBundle\Entity\Node;
+
 
 /**
  * Class SlugManager
@@ -16,6 +19,11 @@ class SlugManager
      */
     const POST_FIX = '.html';
 
+    public function __construct(EntityManager $entityManager)
+    {
+        $this->em = $entityManager;
+    }
+
     /**
      * @param $string
      * @return string
@@ -27,31 +35,17 @@ class SlugManager
 
     /**
      * @param $string
-     * @return mixed
-     */
-    private function removePostfix($string) {
-        $string = str_replace(self::POST_FIX,'',$string);
-        return $string;
-    }
-
-    /**
-     * @param $string
      * @return string
      */
-    public function in($string) {
+    public function generate($string) {
         $manager = New Slugify();
-        $string = $manager->slugify($string);
-        if (strpos($string,self::POST_FIX) === false) {
-            $string = $this->addPostfix($string);
+        $slug = $manager->slugify($string);
+        if (strpos($slug,self::POST_FIX) === false) {
+            $slug = $this->addPostfix($slug);
         }
-        return $string;
+        $count = $this->em->getRepository('AppBundle:Node')
+            ->find(['slug' => $slug])->count();
+        return $slug;
     }
 
-    /**
-     * @param $string
-     * @return mixed
-     */
-    public function out($string) {
-        return $this->removePostfix($string);
-    }
 }
