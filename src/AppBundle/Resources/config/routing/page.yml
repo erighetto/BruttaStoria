@@ -13,3 +13,7 @@ page_privacypolicy:
         sitemap:
             priority: 0.7
             changefreq: weekly
+
+page_thankyou:
+    path: /thank-you
+    defaults: { _controller: "AppBundle:Page:thankyou" }

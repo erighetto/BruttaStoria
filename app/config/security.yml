@@ -23,11 +23,15 @@ security:
             form_login:
                 login_path: /security/login
                 check_path: /security/login
+            logout:
+                path:   /security/logout
+                target: /
 
     access_control:
         - { path: /security/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/dictionary, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/page, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/backend, roles: ROLE_USER }
         - { path: ^/definition, roles: ROLE_ADMIN }
         - { path: ^/hit, roles: ROLE_ADMIN }
         - { path: ^/node, roles: ROLE_ADMIN }

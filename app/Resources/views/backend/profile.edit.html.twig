@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Modifica profilo{% endblock %}
+
+{% block body %}
+    <h1>Modifica profilo</h1>
+
+    {{ form_start(edit_form) }}
+    {{ form_widget(edit_form) }}
+    <input type="submit" class="btn btn-warning" value="Modifica">
+    {{ form_end(edit_form) }}
+
+{% endblock %}

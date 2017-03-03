@@ -6,7 +6,6 @@
     <table class="table">
         <thead>
             <tr>
-                <th>Id</th>
                 <th>Title</th>
                 <th>Slug</th>
                 <th>Status</th>
@@ -20,7 +19,6 @@
         <tbody>
         {% for node in nodes %}
             <tr>
-                <td><a href="{{ path('node_show', { 'id': node.id }) }}">{{ node.id }}</a></td>
                 <td>{{ node.title }}</td>
                 <td>{{ node.slug }}</td>
                 <td>{% if node.status %}Yes{% else %}No{% endif %}</td>
@@ -31,7 +29,7 @@
                 <td>
                     <ul class="list-inline functional_footer_menu">
                         <li>
-                            <a href="{{ path('node_show', { 'id': node.id }) }}">show</a>
+                            <a href="{{ path('single_node', { 'slug': node.slug }) }}" target="_blank">show</a>
                         </li>
                         <li>
                             <a href="{{ path('node_edit', { 'id': node.id }) }}">edit</a>

@@ -3,11 +3,6 @@ node_index:
     defaults: { _controller: "AppBundle:Node:index" }
     methods:  GET
 
-node_show:
-    path:     /{id}/show
-    defaults: { _controller: "AppBundle:Node:show" }
-    methods:  GET
-
 node_new:
     path:     /new
     defaults: { _controller: "AppBundle:Node:new" }
