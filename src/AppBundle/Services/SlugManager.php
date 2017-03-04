@@ -2,6 +2,7 @@
 
 
 namespace AppBundle\Services;
+
 use Cocur\Slugify\Slugify;
 use Doctrine\ORM\EntityManager;
 use AppBundle\Entity\Node;
@@ -28,8 +29,11 @@ class SlugManager
      * @param $string
      * @return string
      */
-    public function addPostfix($string) {
-        $string = $string . self::POST_FIX;
+    public function addPostfix($string)
+    {
+        if (strpos($string, self::POST_FIX) === false) {
+            $string = $string . self::POST_FIX;
+        }
         return $string;
     }
 
@@ -37,14 +41,20 @@ class SlugManager
      * @param $string
      * @return string
      */
-    public function generate($string) {
+    public function generate($string)
+    {
         $manager = New Slugify();
         $slug = $manager->slugify($string);
-        if (strpos($slug,self::POST_FIX) === false) {
-            $slug = $this->addPostfix($slug);
-        }
+        $slug = $this->addPostfix($slug);
+
         $count = $this->em->getRepository('AppBundle:Node')
             ->find(['slug' => $slug])->count();
+
+        if ($count > 0) {
+            $slug = $string . " " . ($count +1);
+            $slug = $this->addPostfix($slug);
+        }
+
         return $slug;
     }
 
