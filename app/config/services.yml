@@ -38,5 +38,5 @@ services:
             - [ setMemcached, [ "@memcached" ] ]
     app.slugmanager:
         class: AppBundle\Services\SlugManager
-        arguments;
+        arguments:
           - "@doctrine.orm.entity_manager"

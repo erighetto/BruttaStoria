@@ -48,9 +48,9 @@ class SlugManager
         $slug = $this->addPostfix($slug);
 
         $count = $this->em->getRepository('AppBundle:Node')
-            ->find(['slug' => $slug])->count();
+            ->findBy(['slug' => $slug]);
 
-        if ($count > 0) {
+        if (count($count) > 0) {
             $slug = $string . " " . ($count +1);
             $slug = $this->addPostfix($slug);
         }

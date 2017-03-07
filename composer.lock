@@ -4,8 +4,57 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "77c279298277d6157b1bdba7c2c603a4",
+    "content-hash": "cf73ce3be70a34cff9f03a7ec505f763",
     "packages": [
+        {
+            "name": "anysrv/recaptcha-bundle",
+            "version": "v1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/exii88/AnysrvRecaptchaBundle.git",
+                "reference": "9e961daddb08e8f79ed2c44e49fde2db2f7a5314"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/exii88/AnysrvRecaptchaBundle/zipball/9e961daddb08e8f79ed2c44e49fde2db2f7a5314",
+                "reference": "9e961daddb08e8f79ed2c44e49fde2db2f7a5314",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^5.3.3|^7.0",
+                "symfony/config": "~3.0",
+                "symfony/dependency-injection": "~3.0",
+                "symfony/form": "~3.0",
+                "symfony/validator": "~3.0"
+            },
+            "type": "symfony-bundle",
+            "autoload": {
+                "psr-4": {
+                    "Anysrv\\RecaptchaBundle\\": ""
+                },
+                "exclude-from-classmap": [
+                    "**/Tests/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Sven Schneider",
+                    "email": "info@exii.de",
+                    "homepage": "https://exii.de"
+                }
+            ],
+            "description": "reCAPTCHA v2 form field integration for Symfony 3",
+            "homepage": "https://github.com/exii88/AnySrvRecaptchaBundle",
+            "keywords": [
+                "Symfony 3",
+                "recaptcha"
+            ],
+            "time": "2016-10-10T13:31:10+00:00"
+        },
         {
             "name": "beberlei/DoctrineExtensions",
             "version": "v1.0.13",

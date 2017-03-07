@@ -20,7 +20,7 @@ class NodeController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $nodes = $em->getRepository('AppBundle:Node')->findBy(array(), array('created' => 'DESC'));
+        $nodes = $em->getRepository('AppBundle:Node')->findBy(array(), array('title' => 'ASC'));
 
         $paginator  = $this->get('knp_paginator');
         $pagination = $paginator->paginate(

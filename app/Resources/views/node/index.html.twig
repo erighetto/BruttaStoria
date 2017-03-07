@@ -6,13 +6,13 @@
     <table class="table">
         <thead>
             <tr>
-                <th>Title</th>
+                <th>{{ knp_pagination_sortable(nodes, 'Title', 'title' )|raw }}</th>
                 <th>Slug</th>
                 <th>Status</th>
                 <th>Promote</th>
                 <th>Sticky</th>
                 <th>Updated</th>
-                <th>Created</th>
+                <th>{{ knp_pagination_sortable(nodes, 'Created', 'created' )|raw }}</th>
                 <th>Actions</th>
             </tr>
         </thead>
@@ -27,7 +27,7 @@
                 <td>{% if node.updated %}{{ node.updated|date('d-m-Y H:i:s') }}{% endif %}</td>
                 <td>{% if node.created %}{{ node.created|date('d-m-Y H:i:s') }}{% endif %}</td>
                 <td>
-                    <ul class="list-inline functional_footer_menu">
+                    <ul class="list-inline">
                         <li>
                             <a href="{{ path('single_node', { 'slug': node.slug }) }}" target="_blank">show</a>
                         </li>

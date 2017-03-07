@@ -19,7 +19,7 @@
                 <td>{{ role.role }}</td>
                 <td>{% if role.isAdmin %}Yes{% else %}No{% endif %}</td>
                 <td>
-                    <ul class="list-inline functional_footer_menu">
+                    <ul class="list-inline">
                         <li>
                             <a href="{{ path('role_show', { 'id': role.id }) }}">show</a>
                         </li>

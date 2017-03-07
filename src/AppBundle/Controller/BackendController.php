@@ -19,7 +19,7 @@ class BackendController extends Controller
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
             $em->persist($user);
-            $em->flush($user);
+            $em->flush();
 
             return $this->redirectToRoute('backend_profile_view');
         }
@@ -36,18 +36,21 @@ class BackendController extends Controller
         $form = $this->createForm('AppBundle\Form\NodeType', $node, ['role' => $user->getRoles()]);
         $form->handleRequest($request);
 
-        $slug = $this->get('app.slugmanager')->generate($node->getTitle());
-        $node->setSlug($slug);
-
-        /*
-         * TODO
-         * Controllare se il nodo già esiste
-         */
-
         if ($form->isSubmitted() && $form->isValid()) {
+
             $em = $this->getDoctrine()->getManager();
+            $check = $em->getRepository('AppBundle:Node')
+                ->findOneByTitle(['title' => $node->getTitle()]);
+
+            if ($check) throw new \Exception('La parola esiste già');
+
+            $slug = $this->get('app.slugmanager')->generate($node->getTitle());
+            $node->setSlug($slug);
+            $node->setCreated(New \DateTime());
+            $node->setUpdated(New \DateTime());
+
             $em->persist($node);
-            $em->flush($node);
+            $em->flush();
 
             return $this->redirectToRoute('backend_new_definition', array('node_id' => $node->getId()));
         }
@@ -67,7 +70,7 @@ class BackendController extends Controller
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
             $em->persist($definition);
-            $em->flush($definition);
+            $em->flush();
 
             return $this->redirectToRoute('page_thankyou');
         }

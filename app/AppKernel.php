@@ -21,6 +21,7 @@ class AppKernel extends Kernel
             new Doctrine\Bundle\DoctrineCacheBundle\DoctrineCacheBundle(),
             new Stfalcon\Bundle\TinymceBundle\StfalconTinymceBundle(),
             new Cocur\Slugify\Bridge\Symfony\CocurSlugifyBundle(),
+            new Anysrv\RecaptchaBundle\AnysrvRecaptchaBundle(),
         ];
 
         if (in_array($this->getEnvironment(), ['dev', 'test'], true)) {
