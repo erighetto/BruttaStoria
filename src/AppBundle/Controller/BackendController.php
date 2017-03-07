@@ -8,8 +8,6 @@ use Symfony\Component\HttpFoundation\Request;
 use AppBundle\Entity\Node;
 use AppBundle\Entity\Definition;
 use AppBundle\Entity\User;
-use HTMLPurifier_Config;
-use HTMLPurifier;
 
 /**
  * Class BackendController

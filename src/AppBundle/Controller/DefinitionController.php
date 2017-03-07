@@ -60,6 +60,9 @@ class DefinitionController extends Controller
         $editForm->handleRequest($request);
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
+            $purifier = $this->get('app.htmlsanitization');
+            $definition->setBody($purifier->purify($definition->getBody()));
+            $definition->setExtraInfo($purifier->purify($definition->getExtraInfo()));
             $this->getDoctrine()->getManager()->flush();
 
             return $this->redirectToRoute('definition_edit', array('id' => $definition->getId()));
