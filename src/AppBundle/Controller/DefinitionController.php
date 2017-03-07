@@ -34,29 +34,6 @@ class DefinitionController extends Controller
         ));
     }
 
-    /**
-     * Creates a new definition entity.
-     *
-     */
-    public function newAction(Request $request)
-    {
-        $definition = new Definition();
-        $form = $this->createForm('AppBundle\Form\DefinitionType', $definition);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($definition);
-            $em->flush($definition);
-
-            return $this->redirectToRoute('definition_show', array('id' => $definition->getId()));
-        }
-
-        return $this->render('definition/new.html.twig', array(
-            'definition' => $definition,
-            'form' => $form->createView(),
-        ));
-    }
 
     /**
      * Finds and displays a definition entity.

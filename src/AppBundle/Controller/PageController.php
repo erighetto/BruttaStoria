@@ -23,7 +23,7 @@ class PageController extends Controller
 
     public function thankyouAction()
     {
-        return $this->render('page/privacy_policy.html.twig', array(
+        return $this->render('page/thankyou.html.twig', array(
             // ...
         ));
     }

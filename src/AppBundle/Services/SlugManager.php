@@ -47,6 +47,7 @@ class SlugManager
         $slug = $manager->slugify($string);
         $slug = $this->addPostfix($slug);
 
+        /** @var \AppBundle\Entity\Node $count */
         $count = $this->em->getRepository('AppBundle:Node')
             ->findBy(['slug' => $slug]);
 

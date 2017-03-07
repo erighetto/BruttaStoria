@@ -3,13 +3,39 @@
 namespace AppBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use AppBundle\Entity\Node;
 use AppBundle\Entity\Definition;
 use AppBundle\Entity\User;
+use HTMLPurifier_Config;
+use HTMLPurifier;
 
+/**
+ * Class BackendController
+ * @package AppBundle\Controller
+ */
 class BackendController extends Controller
 {
+    /**
+     * @var
+     */
+    protected $current_user;
+
+    /**
+     * @param ContainerInterface|null $container
+     */
+    public function setContainer(ContainerInterface $container = null)
+    {
+        parent::setContainer($container);
+        $current_user = $container->get('security.token_storage')->getToken()->getUser();
+        $this->current_user = $current_user;
+    }
+
+    /**
+     * @param Request $request
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
+     */
     public function new_userAction(Request $request)
     {
         $user = new User();
@@ -29,11 +55,15 @@ class BackendController extends Controller
         ));
     }
 
+    /**
+     * @param Request $request
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
+     * @throws \Exception
+     */
     public function new_nodeAction(Request $request)
     {
-        $user = $this->get('security.token_storage')->getToken()->getUser();
         $node = new Node();
-        $form = $this->createForm('AppBundle\Form\NodeType', $node, ['role' => $user->getRoles()]);
+        $form = $this->createForm('AppBundle\Form\NodeType', $node, ['role' => $this->current_user->getRoles()]);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -46,8 +76,6 @@ class BackendController extends Controller
 
             $slug = $this->get('app.slugmanager')->generate($node->getTitle());
             $node->setSlug($slug);
-            $node->setCreated(New \DateTime());
-            $node->setUpdated(New \DateTime());
 
             $em->persist($node);
             $em->flush();
@@ -60,15 +88,23 @@ class BackendController extends Controller
         ));
     }
 
+    /**
+     * @param Request $request
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
+     */
     public function new_definitionAction(Request $request)
     {
-        $user = $this->get('security.token_storage')->getToken()->getUser();
         $definition = new Definition();
-        $form = $this->createForm('AppBundle\Form\DefinitionType', $definition, ['role' => $user->getRoles()]);
+        $definition->setNodeId($request->get('node_id'));
+        $definition->setUserId($this->current_user->getId());
+        $form = $this->createForm('AppBundle\Form\DefinitionType', $definition, ['role' => $this->current_user->getRoles()]);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
+            $purifier = $this->get('app.htmlsanitization');
+            $definition->setBody($purifier->purify($definition->getBody()));
+            $definition->setExtraInfo($purifier->purify($definition->getExtraInfo()));
             $em->persist($definition);
             $em->flush();
 
@@ -81,16 +117,23 @@ class BackendController extends Controller
         ));
     }
 
-    public function profile_viewAction() {
-        $user = $this->get('security.token_storage')->getToken()->getUser();
+    /**
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function profile_viewAction()
+    {
         return $this->render('backend/profile.view.html.twig', array(
-            'user' => $user,
+            'user' => $this->current_user,
         ));
     }
 
+    /**
+     * @param Request $request
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
+     */
     public function profile_editAction(Request $request)
     {
-        $user = $this->get('security.token_storage')->getToken()->getUser();
+        $user = $this->current_user;
         $editForm = $this->createForm('AppBundle\Form\UserType', $user, ['role' => $user->getRoles()]);
         $editForm->handleRequest($request);
 
@@ -105,9 +148,13 @@ class BackendController extends Controller
         ));
     }
 
-    public function profile_resetAction() {
-        return $this->render('backend/profile.reset.html.twig', array(
-            // ...
+    /**
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function profile_resetAction()
+    {
+        $user = $this->current_user;
+        return $this->render('backend/profile.reset.html.twig', array(// ...
         ));
     }
 

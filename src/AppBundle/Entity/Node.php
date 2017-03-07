@@ -12,6 +12,12 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Node
 {
+    public function __construct()
+    {
+        $this->created = new \DateTime();
+        $this->updated = new \DateTime();
+    }
+
     /**
      * @var integer
      *
@@ -40,35 +46,35 @@ class Node
      *
      * @ORM\Column(name="status", type="boolean", nullable=false)
      */
-    private $status = '0';
+    private $status = false;
 
     /**
      * @var boolean
      *
      * @ORM\Column(name="promote", type="boolean", nullable=false)
      */
-    private $promote = '0';
+    private $promote = false;
 
     /**
      * @var boolean
      *
      * @ORM\Column(name="sticky", type="boolean", nullable=false)
      */
-    private $sticky = '0';
+    private $sticky = false;
 
     /**
      * @var \DateTime
      *
      * @ORM\Column(name="updated", type="datetime", nullable=false)
      */
-    private $updated = 'CURRENT_TIMESTAMP';
+    private $updated = null;
 
     /**
      * @var \DateTime
      *
      * @ORM\Column(name="created", type="datetime", nullable=false)
      */
-    private $created = 'CURRENT_TIMESTAMP';
+    private $created = null;
 
 
 

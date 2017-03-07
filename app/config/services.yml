@@ -40,3 +40,5 @@ services:
         class: AppBundle\Services\SlugManager
         arguments:
           - "@doctrine.orm.entity_manager"
+    app.htmlsanitization:
+        class: AppBundle\Services\HtmlSanitization

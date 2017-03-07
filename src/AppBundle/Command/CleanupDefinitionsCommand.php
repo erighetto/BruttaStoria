@@ -7,8 +7,7 @@ use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
-use HTMLPurifier_Config;
-use HTMLPurifier;
+
 
 class CleanupDefinitionsCommand extends ContainerAwareCommand
 {
@@ -25,10 +24,7 @@ class CleanupDefinitionsCommand extends ContainerAwareCommand
     {
         $output->writeln('Sto ripulendo le definizioni dai tag html');
 
-        $config = HTMLPurifier_Config::createDefault();
-        $config->set('CSS.AllowedProperties', array());
-        $config->set('HTML.ForbiddenElements', array('font', 'div', 'span', 'pre'));
-        $purifier = new HTMLPurifier($config);
+        $purifier = $this->getContainer()->get('app.htmlsanitization');
 
         $index = 0;
 

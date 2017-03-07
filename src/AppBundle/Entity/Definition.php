@@ -12,6 +12,13 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Definition
 {
+
+    public function __construct()
+    {
+        $this->created = new \DateTime();
+        $this->updated = new \DateTime();
+    }
+
     /**
      * @var integer
      *
@@ -54,28 +61,28 @@ class Definition
      *
      * @ORM\Column(name="status", type="boolean", nullable=false)
      */
-    private $status = '0';
+    private $status = false;
 
     /**
      * @var float
      *
      * @ORM\Column(name="poll", type="float", precision=10, scale=0, nullable=false)
      */
-    private $poll = '0';
+    private $poll = 0;
 
     /**
      * @var \DateTime
      *
      * @ORM\Column(name="updated", type="datetime", nullable=false)
      */
-    private $updated = 'CURRENT_TIMESTAMP';
+    private $updated = null;
 
     /**
      * @var \DateTime
      *
      * @ORM\Column(name="created", type="datetime", nullable=false)
      */
-    private $created = 'CURRENT_TIMESTAMP';
+    private $created = null;
 
 
 
