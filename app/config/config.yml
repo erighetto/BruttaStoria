@@ -95,3 +95,6 @@ doctrine_cache:
         presta_sitemap:
             type: memcached
             namespace: presta_sitemap
+anysrv_recaptcha:
+    sitekey: "%recaptcha_sitekey%"
+    secret: "%recaptcha_secret%"

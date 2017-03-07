@@ -20,7 +20,7 @@ class NodeController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $nodes = $em->getRepository('AppBundle:Node')->findBy(array(), array('created' => 'DESC'));
+        $nodes = $em->getRepository('AppBundle:Node')->findBy(array(), array('title' => 'ASC'));
 
         $paginator  = $this->get('knp_paginator');
         $pagination = $paginator->paginate(
@@ -55,20 +55,6 @@ class NodeController extends Controller
         return $this->render('node/new.html.twig', array(
             'node' => $node,
             'form' => $form->createView(),
-        ));
-    }
-
-    /**
-     * Finds and displays a node entity.
-     *
-     */
-    public function showAction(Node $node)
-    {
-        $deleteForm = $this->createDeleteForm($node);
-
-        return $this->render('node/show.html.twig', array(
-            'node' => $node,
-            'delete_form' => $deleteForm->createView(),
         ));
     }
 

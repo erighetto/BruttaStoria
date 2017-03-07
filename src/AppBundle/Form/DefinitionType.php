@@ -14,9 +14,17 @@ class DefinitionType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
+        // dump($options['roles']);
+        if (in_array('ROLE_ADMIN', $options['role'])) {
+            $builder
+                ->add('nodeId')
+                ->add('userId')
+                ->add('status')
+                ->add('poll')
+                ->add('updated')
+                ->add('created');
+        }
         $builder
-            ->add('nodeId')
-            ->add('userId')
             ->add('body', TextareaType::class, array(
                 'attr' => array(
                     'class' => 'tinymce',
@@ -28,11 +36,7 @@ class DefinitionType extends AbstractType
                     'class' => 'tinymce',
                     'data-theme' => 'bbcode' // Skip it if you want to use default theme
                 )
-            ))
-            ->add('status')
-            ->add('poll')
-            ->add('updated')
-            ->add('created');
+            ));
     }
 
     /**
@@ -41,7 +45,8 @@ class DefinitionType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'AppBundle\Entity\Definition'
+            'data_class' => 'AppBundle\Entity\Definition',
+            'role' => ['ROLE_USER'],
         ));
     }
 

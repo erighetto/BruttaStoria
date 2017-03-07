@@ -21,4 +21,11 @@ class PageController extends Controller
         ));
     }
 
+    public function thankyouAction()
+    {
+        return $this->render('page/privacy_policy.html.twig', array(
+            // ...
+        ));
+    }
+
 }

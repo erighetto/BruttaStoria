@@ -13,7 +13,19 @@ class NodeType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('title')->add('slug')->add('status')->add('promote')->add('sticky')->add('updated')->add('created')        ;
+        if (in_array('ROLE_ADMIN', $options['role'])) {
+            $builder
+                ->add('title')
+                ->add('slug')
+                ->add('status')
+                ->add('promote')
+                ->add('sticky')
+                ->add('updated')
+                ->add('created');
+        } else {
+            $builder
+            ->add('title');
+        }
     }
     
     /**
@@ -22,7 +34,11 @@ class NodeType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'AppBundle\Entity\Node'
+            'data_class' => 'AppBundle\Entity\Node',
+            'status' => false,
+            'sticky' => false,
+            'promote' => false,
+            'role' => ['ROLE_USER'],
         ));
     }
 

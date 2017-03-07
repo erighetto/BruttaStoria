@@ -36,3 +36,7 @@ services:
         class: Doctrine\Common\Cache\MemcachedCache
         calls:
             - [ setMemcached, [ "@memcached" ] ]
+    app.slugmanager:
+        class: AppBundle\Services\SlugManager
+        arguments:
+          - "@doctrine.orm.entity_manager"

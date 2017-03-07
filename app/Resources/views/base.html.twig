@@ -38,6 +38,9 @@
             {% if is_granted('ROLE_ADMIN') %}
                 {% include 'admin_menu.html.twig' %}
             {% endif %}
+            {% if is_granted('ROLE_USER') %}
+                {% include 'user_menu.html.twig' %}
+            {% endif %}
         </div><!--/.navbar-collapse -->
     </div>
 </nav>
