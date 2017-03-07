@@ -34,29 +34,6 @@ class NodeController extends Controller
         ));
     }
 
-    /**
-     * Creates a new node entity.
-     *
-     */
-    public function newAction(Request $request)
-    {
-        $node = new Node();
-        $form = $this->createForm('AppBundle\Form\NodeType', $node);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($node);
-            $em->flush($node);
-
-            return $this->redirectToRoute('node_show', array('id' => $node->getId()));
-        }
-
-        return $this->render('node/new.html.twig', array(
-            'node' => $node,
-            'form' => $form->createView(),
-        ));
-    }
 
     /**
      * Displays a form to edit an existing node entity.
@@ -64,8 +41,9 @@ class NodeController extends Controller
      */
     public function editAction(Request $request, Node $node)
     {
+        $user = $this->get('security.token_storage')->getToken()->getUser();
         $deleteForm = $this->createDeleteForm($node);
-        $editForm = $this->createForm('AppBundle\Form\NodeType', $node);
+        $editForm = $this->createForm('AppBundle\Form\NodeType', $node, ['role' => $user->getRoles()]);
         $editForm->handleRequest($request);
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {

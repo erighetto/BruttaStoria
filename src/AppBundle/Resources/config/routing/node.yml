@@ -3,11 +3,6 @@ node_index:
     defaults: { _controller: "AppBundle:Node:index" }
     methods:  GET
 
-node_new:
-    path:     /new
-    defaults: { _controller: "AppBundle:Node:new" }
-    methods:  [GET, POST]
-
 node_edit:
     path:     /{id}/edit
     defaults: { _controller: "AppBundle:Node:edit" }
