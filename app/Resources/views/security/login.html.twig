@@ -22,7 +22,11 @@
                 <input type="password" class="form-control" id="password" name="_password"/>
             </div>
         </div>
-        <button type="submit" class="btn btn-success">login</button>
+        <button type="submit" class="btn btn-success">Login</button>
     </form>
+
+    <ul class="list-inline functional_footer_menu">
+        <li><a href="{{ path('security_new_user') }}" class="btn btn-primary">Registrati</a></li>
+    </ul>
 
 {% endblock %}

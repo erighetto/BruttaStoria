@@ -1,8 +1,3 @@
-backend_new_user:
-    path:     /new_user
-    defaults: { _controller: "AppBundle:Backend:new_user" }
-    methods:  [GET, POST]
-
 backend_new_node:
     path:     /new_node
     defaults: { _controller: "AppBundle:Backend:new_node" }

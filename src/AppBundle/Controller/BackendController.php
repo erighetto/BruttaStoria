@@ -7,7 +7,6 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use AppBundle\Entity\Node;
 use AppBundle\Entity\Definition;
-use AppBundle\Entity\User;
 
 /**
  * Class BackendController
@@ -28,29 +27,6 @@ class BackendController extends Controller
         parent::setContainer($container);
         $current_user = $container->get('security.token_storage')->getToken()->getUser();
         $this->current_user = $current_user;
-    }
-
-    /**
-     * @param Request $request
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
-     */
-    public function new_userAction(Request $request)
-    {
-        $user = new User();
-        $form = $this->createForm('AppBundle\Form\UserType', $user);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($user);
-            $em->flush();
-
-            return $this->redirectToRoute('backend_profile_view');
-        }
-        return $this->render('backend/new.user.html.twig', array(
-            'user' => $user,
-            'form' => $form->createView(),
-        ));
     }
 
     /**

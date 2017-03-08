@@ -34,6 +34,11 @@ security_login:
     path: /security/login
     defaults: { _controller: "AppBundle:Security:login"}
 
+security_new_user:
+    path:     /security/new_user
+    defaults: { _controller: "AppBundle:Security:new_user" }
+    methods:  [GET, POST]
+
 logout:
     path: /security/logout
 
