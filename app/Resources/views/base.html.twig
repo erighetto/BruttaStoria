@@ -53,6 +53,13 @@
 
     <div class="row">
     <div class="col-md-9">
+        {% for type, flash_messages in app.session.flashBag.all %}
+            {% for flash_message in flash_messages %}
+                <div class="flash-{{ type }}">
+                    {{ flash_message }}
+                </div>
+            {% endfor %}
+        {% endfor %}
         {% block body %}{% endblock %}
         {% block javascripts %}{% endblock %}
     </div>

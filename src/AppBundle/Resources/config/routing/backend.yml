@@ -17,7 +17,7 @@ backend_profile_edit:
     defaults: { _controller: "AppBundle:Backend:profile_edit" }
     methods:  [GET, POST]
 
-backend_profile_reset:
-    path:     /profile/reset
-    defaults: { _controller: "AppBundle:Backend:profile_reset" }
+backend_profile_changepassword:
+    path:     /profile/change_password
+    defaults: { _controller: "AppBundle:Backend:profile_changepassword" }
     methods:  [GET, POST]

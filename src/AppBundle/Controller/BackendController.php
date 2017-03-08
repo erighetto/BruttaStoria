@@ -2,6 +2,7 @@
 
 namespace AppBundle\Controller;
 
+use AppBundle\AppBundle;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -125,10 +126,42 @@ class BackendController extends Controller
     /**
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function profile_resetAction()
+    public function profile_changepasswordAction(Request $request)
     {
-        $user = $this->current_user;
-        return $this->render('backend/profile.reset.html.twig', array(// ...
+        $session = $request->getSession();
+        $form = $this->createForm('AppBundle\Form\ChangePasswordType', $this->current_user);
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+
+            /** @var \AppBundle\Entity\User $user */
+            $user = $this->getUser();
+            $old_pwd = $user->getOldPassword();
+            $new_pwd = $user->getNewPassword();
+            $encoder = $this->get('security.password_encoder');
+            $old_pwd_encoded = $encoder->encodePassword($user, $old_pwd);
+
+
+            if ($user->getPassword() != $old_pwd_encoded) {
+                $session->getFlashBag()->set('error_msg', "Wrong old password!");
+            } else {
+                $new_pwd_encoded = $encoder->encodePassword($user, $new_pwd['']);
+                $user->setPassword($new_pwd_encoded);
+                $manager = $this->getDoctrine()->getManager();
+                $manager->persist($user);
+
+                $manager->flush();
+                $session->getFlashBag()->set('success_msg', "Password change successfully!");
+            }
+
+            return $this->redirect($this->generateUrl('backend_profile_view'));
+        }
+
+
+        //$user = ;
+        return $this->render('backend/profile.changepassword.html.twig', array(
+            'form' => $form->createView()
         ));
     }
 

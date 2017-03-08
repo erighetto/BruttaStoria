@@ -22,7 +22,6 @@ class UserType extends AbstractType
             $builder
                 ->add('roleId')
                 ->add('username')
-                ->add('password')
                 ->add('name')
                 ->add('email')
                 ->add('website')
@@ -52,7 +51,10 @@ class UserType extends AbstractType
             // If no data is passed to the form, the data is "null".
             // This should be considered a new "User"
             if (!$user || null === $user->getId()) {
-                $form->add('recaptcha', AnysrvRecaptchaType::class, array(
+
+                $form
+                    ->add('password')
+                    ->add('recaptcha', AnysrvRecaptchaType::class, array(
                     'mapped' => false,
                     'constraints' => array(
                         new RecaptchaTrue(),

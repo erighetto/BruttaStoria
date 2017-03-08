@@ -4,6 +4,8 @@ namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Security\Core\Validator\Constraints as SecurityAssert;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * User
@@ -13,6 +15,12 @@ use Symfony\Component\Security\Core\User\UserInterface;
  */
 class User implements UserInterface, \Serializable
 {
+    public function __construct()
+    {
+        $this->created = new \DateTime();
+        $this->updated = new \DateTime();
+    }
+
     /**
      * @var integer
      *
@@ -97,23 +105,36 @@ class User implements UserInterface, \Serializable
      *
      * @ORM\Column(name="status", type="boolean", nullable=false)
      */
-    private $status = '0';
+    private $status = true;
 
     /**
      * @var \DateTime
      *
      * @ORM\Column(name="updated", type="datetime", nullable=false)
      */
-    private $updated = 'CURRENT_TIMESTAMP';
+    private $updated = null;
 
     /**
      * @var \DateTime
      *
      * @ORM\Column(name="created", type="datetime", nullable=false)
      */
-    private $created = 'CURRENT_TIMESTAMP';
+    private $created = null;
 
+    /**
+     * @SecurityAssert\UserPassword(
+     *     message = "Wrong value for your current password"
+     * )
+     */
+    protected $oldPassword;
 
+    /**
+     * @Assert\Length(
+     *     min = 8,
+     *     minMessage = "Password should by at least 8 chars long"
+     * )
+     */
+    protected $newPassword;
 
     /**
      * Get id
@@ -498,6 +519,38 @@ class User implements UserInterface, \Serializable
     public function eraseCredentials()
     {
         // TODO: Implement eraseCredentials() method.
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getOldPassword()
+    {
+        return $this->oldPassword;
+    }
+
+    /**
+     * @param mixed $oldPassword
+     */
+    public function setOldPassword($oldPassword)
+    {
+        $this->oldPassword = $oldPassword;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getNewPassword()
+    {
+        return $this->newPassword;
+    }
+
+    /**
+     * @param mixed $newPassword
+     */
+    public function setNewPassword($newPassword)
+    {
+        $this->newPassword = $newPassword;
     }
 
 }
