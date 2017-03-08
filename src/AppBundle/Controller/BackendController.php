@@ -144,7 +144,7 @@ class BackendController extends Controller
 
 
             if ($user->getPassword() != $old_pwd_encoded) {
-                $session->getFlashBag()->set('error_msg', "Wrong old password!");
+                $session->getFlashBag()->set('alert-danger', "Wrong old password!");
             } else {
                 $new_pwd_encoded = $encoder->encodePassword($user, $new_pwd['']);
                 $user->setPassword($new_pwd_encoded);
@@ -152,7 +152,7 @@ class BackendController extends Controller
                 $manager->persist($user);
 
                 $manager->flush();
-                $session->getFlashBag()->set('success_msg', "Password change successfully!");
+                $session->getFlashBag()->set('alert-success', "Password change successfully!");
             }
 
             return $this->redirect($this->generateUrl('backend_profile_view'));
