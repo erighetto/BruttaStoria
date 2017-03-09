@@ -5,3 +5,7 @@ app:
 PrestaSitemapBundle:
     resource: "@PrestaSitemapBundle/Resources/config/routing.yml"
     prefix: /
+
+coop_tilleuls_forgot_password:
+    resource: '@CoopTilleulsForgotPasswordBundle/Resources/config/routing.xml'
+    prefix:   '/forgot_password'

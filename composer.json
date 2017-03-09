@@ -29,7 +29,8 @@
         "presta/sitemap-bundle": "^1.5",
         "stfalcon/tinymce-bundle": "2.0",
         "cocur/slugify": "^2.4",
-        "anysrv/recaptcha-bundle": "^1.0"
+        "anysrv/recaptcha-bundle": "^1.0",
+        "tilleuls/forgot-password-bundle": "^1.0"
     },
     "require-dev": {
         "sensio/generator-bundle": "^3.0",

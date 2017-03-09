@@ -5,10 +5,20 @@ namespace AppBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use AppBundle\Entity\User;
 
+/**
+ * Class SecurityController
+ * @package AppBundle\Controller
+ */
 class SecurityController extends Controller
 {
+    /**
+     * @param Request $request
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
     public function loginAction(Request $request)
     {
         $authenticationUtils = $this->get('security.authentication_utils');
@@ -48,4 +58,21 @@ class SecurityController extends Controller
         ));
     }
 
+    /**
+     * @param Request $request
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function reset_passwordAction(Request $request)
+    {
+
+        $form = $this->createFormBuilder()
+            ->setAction($this->generateUrl('coop_tilleuls_forgot_password.reset'))
+            ->add('email', TextType::class, array('label' => 'Email'))
+            ->add('reset', SubmitType::class, array('label' => 'Reset Password'))
+            ->getForm();
+
+        return $this->render('security/reset.password.html.twig', array(
+            'form' => $form->createView(),
+        ));
+    }
 }

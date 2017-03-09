@@ -8,6 +8,7 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use AppBundle\Entity\Node;
 use AppBundle\Entity\Definition;
+use AppBundle\Entity\ChangePassword;
 
 /**
  * Class BackendController
@@ -128,38 +129,35 @@ class BackendController extends Controller
      */
     public function profile_changepasswordAction(Request $request)
     {
+        $changePasswordModel = new ChangePassword();
+        $changePasswordModel->setUser($this->current_user);
+
         $session = $request->getSession();
-        $form = $this->createForm('AppBundle\Form\ChangePasswordType', $this->current_user);
+        $form = $this->createForm('AppBundle\Form\ChangePasswordType', $changePasswordModel);
 
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
 
-            /** @var \AppBundle\Entity\User $user */
-            $user = $this->getUser();
-            $old_pwd = $user->getOldPassword();
-            $new_pwd = $user->getNewPassword();
-            $encoder = $this->get('security.password_encoder');
-            $old_pwd_encoded = $encoder->encodePassword($user, $old_pwd);
+            /** @var AppBundle/Entity/ChangePassword $changePassword */
+            $changePassword = $form->getData();
+            $factory = $this->get('security.encoder_factory');
+            $encoder = $factory->getEncoder($changePassword->getUser());
+            $password = $encoder->encodePassword(
+                $changePassword->getNewPassword(),
+                $changePassword->getUser()->getSalt()
+            );
+            $changePassword->getUser()->setPassword($password);
 
+            $manager = $this->getDoctrine()->getManager();
+            $manager->persist($changePassword->getUser());
+            $manager->flush();
 
-            if ($user->getPassword() != $old_pwd_encoded) {
-                $session->getFlashBag()->set('alert-danger', "Wrong old password!");
-            } else {
-                $new_pwd_encoded = $encoder->encodePassword($user, $new_pwd['']);
-                $user->setPassword($new_pwd_encoded);
-                $manager = $this->getDoctrine()->getManager();
-                $manager->persist($user);
-
-                $manager->flush();
-                $session->getFlashBag()->set('alert-success', "Password change successfully!");
-            }
+            $session->getFlashBag()->set('alert-success', "Password change successfully!");
 
             return $this->redirect($this->generateUrl('backend_profile_view'));
         }
 
-
-        //$user = ;
         return $this->render('backend/profile.changepassword.html.twig', array(
             'form' => $form->createView()
         ));

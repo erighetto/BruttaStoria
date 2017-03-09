@@ -29,6 +29,7 @@ security:
 
     access_control:
         - { path: /security/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/forgot_password, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/dictionary, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/page, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/backend, roles: ROLE_USER }

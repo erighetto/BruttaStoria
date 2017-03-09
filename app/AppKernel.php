@@ -22,6 +22,7 @@ class AppKernel extends Kernel
             new Stfalcon\Bundle\TinymceBundle\StfalconTinymceBundle(),
             new Cocur\Slugify\Bridge\Symfony\CocurSlugifyBundle(),
             new Anysrv\RecaptchaBundle\AnysrvRecaptchaBundle(),
+            new CoopTilleuls\ForgotPasswordBundle\CoopTilleulsForgotPasswordBundle(),
         ];
 
         if (in_array($this->getEnvironment(), ['dev', 'test'], true)) {

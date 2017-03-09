@@ -37,7 +37,7 @@ class ChangePasswordType extends AbstractType
     public function setDefaultOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'AppBundle\Entity\User',
+            'data_class' => 'AppBundle\Entity\ChangePassword',
         ));
     }
 

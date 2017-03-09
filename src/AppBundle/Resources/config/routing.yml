@@ -30,14 +30,9 @@ app_backend:
     resource: "@AppBundle/Resources/config/routing/backend.yml"
     prefix: /backend
 
-security_login:
-    path: /security/login
-    defaults: { _controller: "AppBundle:Security:login"}
-
-security_new_user:
-    path:     /security/new_user
-    defaults: { _controller: "AppBundle:Security:new_user" }
-    methods:  [GET, POST]
+app_security:
+    resource: "@AppBundle/Resources/config/routing/security.yml"
+    prefix: /security
 
 logout:
     path: /security/logout

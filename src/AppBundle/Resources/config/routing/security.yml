@@ -1,0 +1,12 @@
+security_login:
+    path: /login
+    defaults: { _controller: "AppBundle:Security:login"}
+
+security_new_user:
+    path:     /new_user
+    defaults: { _controller: "AppBundle:Security:new_user" }
+    methods:  [GET, POST]
+
+security_reset_password:
+    path: /reset_password
+    defaults: { _controller: "AppBundle:Security:reset_password" }

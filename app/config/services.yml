@@ -42,3 +42,7 @@ services:
           - "@doctrine.orm.entity_manager"
     app.htmlsanitization:
         class: AppBundle\Services\HtmlSanitization
+    app.listener.forgot_password:
+        class: AppBundle\EventListener\ForgotPasswordEventListener
+        tags:
+            - { name: kernel.event_listener, event: coop_tilleuls_forgot_password.create_token, method: onCreateToken }
