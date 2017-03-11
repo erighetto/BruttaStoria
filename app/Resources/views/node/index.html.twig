@@ -6,13 +6,13 @@
     <table class="table">
         <thead>
             <tr>
-                <th>{{ knp_pagination_sortable(nodes, 'Title', 'title' )|raw }}</th>
+                <th>{{ knp_pagination_sortable(nodes, 'Title', 'n.title' )|raw }}</th>
                 <th>Slug</th>
                 <th>Status</th>
                 <th>Promote</th>
                 <th>Sticky</th>
                 <th>Updated</th>
-                <th>{{ knp_pagination_sortable(nodes, 'Created', 'created' )|raw }}</th>
+                <th>{{ knp_pagination_sortable(nodes, 'Created', 'n.created' )|raw }}</th>
                 <th>Actions</th>
             </tr>
         </thead>

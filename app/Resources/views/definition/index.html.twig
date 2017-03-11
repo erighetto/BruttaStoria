@@ -6,15 +6,15 @@
     <table class="table">
         <thead>
             <tr>
-                <th>Id</th>
+                <th>{{ knp_pagination_sortable(definitions, 'Id', 'd.id' )|raw }}</th>
                 <th>Nodeid</th>
-                <th>Userid</th>
+                <th>{{ knp_pagination_sortable(definitions, 'UserId', 'd.userId' )|raw }}</th>
                 <th>Body</th>
                 <th>ExtraInfo</th>
-                <th>Status</th>
-                <th>Poll</th>
+                <th>{{ knp_pagination_sortable(definitions, 'Status', 'd.status' )|raw }}</th>
+                <th>{{ knp_pagination_sortable(definitions, 'Poll', 'd.poll' )|raw }}</th>
                 <th>Updated</th>
-                <th>Created</th>
+                <th>{{ knp_pagination_sortable(definitions, 'Created', 'd.created' )|raw }}</th>
                 <th>Actions</th>
             </tr>
         </thead>
@@ -23,7 +23,7 @@
             <tr>
                 <td><a href="{{ path('definition_show', { 'id': definition.id }) }}">{{ definition.id }}</a></td>
                 <td>{{ definition.nodeId }}</td>
-                <td>{{ definition.userId }}</td>
+                <td><a href="{{ path('user_show', { 'id': definition.userId }) }}" target="_blank">{{ definition.userId }}</a></td>
                 <td>{{ definition.body|raw }}</td>
                 <td>{{ definition.extraInfo|raw }}</td>
                 <td>{% if definition.status %}Yes{% else %}No{% endif %}</td>

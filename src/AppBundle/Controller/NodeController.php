@@ -19,12 +19,15 @@ class NodeController extends Controller
     public function indexAction(Request $request)
     {
         $em = $this->getDoctrine()->getManager();
-
-        $nodes = $em->getRepository('AppBundle:Node')->findBy(array(), array('title' => 'ASC'));
+        $qb = $em->createQueryBuilder();
+        $qb->select('n')
+            ->from('AppBundle:Node', 'n')
+            ->orderBy('n.title', 'ASC');
+        $query = $qb->getQuery();
 
         $paginator  = $this->get('knp_paginator');
         $pagination = $paginator->paginate(
-          $nodes, /* query NOT result */
+            $query, /* query NOT result */
           $request->query->getInt('page', 1)/*page number*/,
           20/*limit per page*/
         );

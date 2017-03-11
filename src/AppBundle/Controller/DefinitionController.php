@@ -19,12 +19,15 @@ class DefinitionController extends Controller
     public function indexAction(Request $request)
     {
         $em = $this->getDoctrine()->getManager();
-
-        $definitions = $em->getRepository('AppBundle:Definition')->findBy(array(), array('created' => 'DESC'));
+        $qb = $em->createQueryBuilder();
+        $qb->select('d')
+            ->from('AppBundle:Definition', 'd')
+            ->orderBy('d.created', 'DESC');
+        $query = $qb->getQuery();
 
         $paginator  = $this->get('knp_paginator');
         $pagination = $paginator->paginate(
-            $definitions, /* query NOT result */
+            $query, /* query NOT result */
             $request->query->getInt('page', 1)/*page number*/,
             20/*limit per page*/
         );

@@ -31,7 +31,9 @@
             }
             }
         %}
+
      {% set index = random(5) %}
+
         <p>Questo è molto brutto, lo sappiamo.</p>
         <p>Lo smanettone che segue il sito è stato informato della cosa.</p>
         <p>Risolverà non appena finisce di <a href="{{ url('single_node', { 'slug': payoff[index].link }, true) }}">{{ payoff[index].action }}</a>.</p>
