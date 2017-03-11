@@ -68,7 +68,7 @@ class SecurityController extends Controller
         $form = $this->createFormBuilder()
             ->setAction($this->generateUrl('coop_tilleuls_forgot_password.reset'))
             ->add('email', TextType::class, array('label' => 'Email'))
-            ->add('reset', SubmitType::class, array('label' => 'Reset Password'))
+            ->add('reset', SubmitType::class, array('label' => 'Reset Password', 'attr' => array('class' => 'btn btn-warning')))
             ->getForm();
 
         return $this->render('security/reset.password.html.twig', array(

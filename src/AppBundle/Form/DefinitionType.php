@@ -28,14 +28,16 @@ class DefinitionType extends AbstractType
             ->add('body', TextareaType::class, array(
                 'attr' => array(
                     'class' => 'tinymce',
-                    'data-theme' => 'bbcode' // Skip it if you want to use default theme
-                )
+                    'data-theme' => 'bbcode'
+                ),
+                'label' => 'Definizione'
             ))
             ->add('extraInfo', TextareaType::class, array(
                 'attr' => array(
                     'class' => 'tinymce',
-                    'data-theme' => 'bbcode' // Skip it if you want to use default theme
-                )
+                    'data-theme' => 'bbcode'
+                ),
+                'label' => 'Fornisci degli esempi di utilizzo'
             ));
     }
 
