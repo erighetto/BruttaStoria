@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}An Error Occurred: {{ status_text }}{% endblock %}
+
+{% block body %}
+
+    <h1>An Error Occurred: {{ status_text }}</h1>
+
+    {% if status_code >= 500 %}
+
+        {% set payoff = {
+            '1': {
+            'action' : 'scambiare cazzi per palazzi',
+            'link' : 'scambiare-cazzi-per-palazzi.html'
+            },
+            '2': {
+            'action' : 'fare il salto della quaglia',
+            'link' : 'salto-della-quaglia.html'
+            },
+            '3': {
+            'action' : 'raddrizzare banane col culo',
+            'link' : 'raddrizzare-banane-col-culo.html'
+            },
+            '4': {
+            'action' : 'fare il salto della quaglia',
+            'link' : 'salto-della-quaglia.html'
+            },
+            '5': {
+            'action' : 'farsi le pippe mentali',
+            'link' : 'farsi-le-pippe-mentali.html'
+            }
+            }
+        %}
+     {% set index = random(5) %}
+        <p>Questo è molto brutto, lo sappiamo.</p>
+        <p>Lo smanettone che segue il sito è stato informato della cosa.</p>
+        <p>Risolverà non appena finisce di <a href="{{ url('single_node', { 'slug': payoff[index].link }, true) }}">{{ payoff[index].action }}</a>.</p>
+
+    {% elseif status_code >= 400 %}
+        {{ currentContent|raw }}
+    {% endif %}
+
+{% endblock %}

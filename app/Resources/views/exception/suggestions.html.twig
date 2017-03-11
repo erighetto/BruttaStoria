@@ -1,0 +1,7 @@
+<h2>Forse stavi cercando:</h2>
+
+<ul>
+    {% for node in nodes %}
+        <li><a href="{{ url('single_node', { 'slug': node.slug }, true) }}">{{ node.title }}</a></li>
+    {% endfor %}
+</ul>

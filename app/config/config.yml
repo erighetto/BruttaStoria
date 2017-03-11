@@ -42,7 +42,8 @@ twig:
         fulltextSearch: "@app.fulltextsearch"
     form_themes:
         - 'bootstrap_3_layout.html.twig'
-        
+    exception_controller: app.exception_controller:showAction
+
 # Doctrine Configuration
 doctrine:
     dbal:
@@ -52,7 +53,7 @@ doctrine:
         dbname:   "%database_name%"
         user:     "%database_user%"
         password: "%database_password%"
-        charset:  UTF8
+        charset:  utf8mb4
 
         # if using pdo_sqlite as your database driver:
         #   1. add the path in parameters.yml
