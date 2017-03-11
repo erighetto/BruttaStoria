@@ -30,7 +30,9 @@
                         <a href="#{{ entity.d_id }}"><span class="glyphicon glyphicon-minus"></span></a> |
                         Voti: <span class="badge poll">{{ entity.d_poll }}</span>
                         {% if is_granted('ROLE_ADMIN') %}
-                            <a href="{{ path('definition_edit', { 'id': entity.d_id }) }}" target="_blank"><i class="fa fa-pencil-square" aria-hidden="true"></i> edit</a>
+                            <p class="pull-right">
+                                <a href="{{ path('definition_edit', { 'id': entity.d_id }) }}" target="_blank"><i class="fa fa-pencil-square fa-2x" aria-hidden="true"></i> edit</a>
+                            </p>
                         {% endif %}
                     </footer>
                 </article>
