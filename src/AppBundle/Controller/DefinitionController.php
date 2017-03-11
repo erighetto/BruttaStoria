@@ -58,8 +58,9 @@ class DefinitionController extends Controller
      */
     public function editAction(Request $request, Definition $definition)
     {
+        $user = $this->get('security.token_storage')->getToken()->getUser();
         $deleteForm = $this->createDeleteForm($definition);
-        $editForm = $this->createForm('AppBundle\Form\DefinitionType', $definition);
+        $editForm = $this->createForm('AppBundle\Form\DefinitionType', $definition, ['role' => $user->getRoles()]);
         $editForm->handleRequest($request);
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
