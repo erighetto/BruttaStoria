@@ -6,13 +6,13 @@
     <table class="table">
         <thead>
             <tr>
-                <th>Id</th>
-                <th>Username</th>
-                <th>Name</th>
-                <th>Email</th>
-                <th>Website</th>
-                <th>Origin</th>
-                <th>Status</th>
+                <th>{{ knp_pagination_sortable(users, 'Id', 'u.id' )|raw }}</th>
+                <th>{{ knp_pagination_sortable(users, 'Username', 'u.username' )|raw }}</th>
+                <th>{{ knp_pagination_sortable(users, 'Name', 'u.name' )|raw }}</th>
+                <th>{{ knp_pagination_sortable(users, 'Email', 'u.email' )|raw }}</th>
+                <th>{{ knp_pagination_sortable(users, 'Website', 'u.website' )|raw }}</th>
+                <th>{{ knp_pagination_sortable(users, 'Origin', 'u.origin' )|raw }}</th>
+                <th>{{ knp_pagination_sortable(users, 'Status', 'u.status' )|raw }}</th>
                 <th>Actions</th>
             </tr>
         </thead>
@@ -23,7 +23,7 @@
                 <td>{{ user.username }}</td>
                 <td>{{ user.name }}</td>
                 <td>{{ user.email }}</td>
-                <td>{{ user.website }}</td>
+                <td>{% if user.website %}<a href="{{ user.website|raw }}" target="_blank">{{ user.website|replace({'http://': '', 'www.': ''})|striptags|slice(0, 15) ~ '...' }}{% endif %}</td>
                 <td>{{ user.origin }}</td>
                 <td>{% if user.status %}Yes{% else %}No{% endif %}</td>
                 <td>
@@ -40,6 +40,10 @@
         {% endfor %}
         </tbody>
     </table>
+
+<div class="navigation">
+    {{ knp_pagination_render(users) }}
+</div>
 
     <ul class="list-inline functional_footer_menu">
         <li>

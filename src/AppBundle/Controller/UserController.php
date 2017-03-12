@@ -18,13 +18,17 @@ class UserController extends Controller
      */
     public function indexAction(Request $request)
     {
-        $em = $this->getDoctrine()->getManager();
 
-        $users = $em->getRepository('AppBundle:User')->findBy(array(), array('created' => 'DESC'));
+        $em = $this->getDoctrine()->getManager();
+        $qb = $em->createQueryBuilder();
+        $qb->select(array('u'))
+            ->from('AppBundle:User', 'u')
+            ->orderBy('u.created', 'DESC');
+        $query = $qb->getQuery();
 
         $paginator  = $this->get('knp_paginator');
         $pagination = $paginator->paginate(
-            $users, /* query NOT result */
+            $query, /* query NOT result */
             $request->query->getInt('page', 1)/*page number*/,
             20/*limit per page*/
         );
