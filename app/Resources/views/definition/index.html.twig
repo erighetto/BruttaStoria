@@ -7,13 +7,13 @@
         <thead>
             <tr>
                 <th>{{ knp_pagination_sortable(definitions, 'Id', 'd.id' )|raw }}</th>
-                <th>Nodeid</th>
+                <th>{{ knp_pagination_sortable(definitions, 'Node', 'n.title' )|raw }}</th>
                 <th>{{ knp_pagination_sortable(definitions, 'UserId', 'd.userId' )|raw }}</th>
                 <th>Body</th>
                 <th>ExtraInfo</th>
                 <th>{{ knp_pagination_sortable(definitions, 'Status', 'd.status' )|raw }}</th>
                 <th>{{ knp_pagination_sortable(definitions, 'Poll', 'd.poll' )|raw }}</th>
-                <th>Updated</th>
+                <th>{{ knp_pagination_sortable(definitions, 'Updated', 'd.updated' )|raw }}</th>
                 <th>{{ knp_pagination_sortable(definitions, 'Created', 'd.created' )|raw }}</th>
                 <th>Actions</th>
             </tr>
@@ -21,22 +21,22 @@
         <tbody>
         {% for definition in definitions %}
             <tr>
-                <td><a href="{{ path('definition_show', { 'id': definition.id }) }}">{{ definition.id }}</a></td>
-                <td>{{ definition.nodeId }}</td>
-                <td><a href="{{ path('user_show', { 'id': definition.userId }) }}" target="_blank">{{ definition.userId }}</a></td>
-                <td>{{ definition.body|raw }}</td>
-                <td>{{ definition.extraInfo|raw }}</td>
-                <td>{% if definition.status %}Yes{% else %}No{% endif %}</td>
-                <td>{{ definition.poll }}</td>
-                <td>{% if definition.updated %}{{ definition.updated|date('d-m-Y H:i:s') }}{% endif %}</td>
-                <td>{% if definition.created %}{{ definition.created|date('d-m-Y H:i:s') }}{% endif %}</td>
+                <td><a href="{{ path('definition_show', { 'id': definition.d_id }) }}">{{ definition.d_id }}</a></td>
+                <td><a href="{{ path('single_node', { 'slug': definition.n_slug }) }}" target="_blank">{{ definition.n_title }}</a></td>
+                <td><a href="{{ path('user_show', { 'id': definition.d_userId }) }}" target="_blank">{{ definition.d_userId }}</a></td>
+                <td>{{ definition.d_body|raw }}</td>
+                <td>{{ definition.d_extraInfo|raw }}</td>
+                <td>{% if definition.d_status %}Yes{% else %}No{% endif %}</td>
+                <td>{{ definition.d_poll }}</td>
+                <td>{% if definition.d_updated %}{{ definition.d_updated|date('d-m-Y H:i:s') }}{% endif %}</td>
+                <td>{% if definition.d_created %}{{ definition.d_created|date('d-m-Y H:i:s') }}{% endif %}</td>
                 <td>
                     <ul class="list-inline">
                         <li>
-                            <a href="{{ path('definition_show', { 'id': definition.id }) }}">show</a>
+                            <a href="{{ path('definition_show', { 'id': definition.d_id }) }}">show</a>
                         </li>
                         <li>
-                            <a href="{{ path('definition_edit', { 'id': definition.id }) }}">edit</a>
+                            <a href="{{ path('definition_edit', { 'id': definition.d_id }) }}">edit</a>
                         </li>
                     </ul>
                 </td>

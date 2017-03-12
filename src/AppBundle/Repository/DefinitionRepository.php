@@ -37,4 +37,21 @@ class DefinitionRepository extends EntityRepository
         return $results;
     }
 
+    /**
+     * @return Query
+     */
+    function findAllforBackend()
+    {
+        $em = $this->getEntityManager();
+        $qb = $em->createQueryBuilder();
+        $qb->select('d','n')
+            ->from('AppBundle:Definition', 'd')
+            ->innerJoin('AppBundle:Node', 'n', Join::WITH, 'd.nodeId = n.id')
+            ->orderBy('d.created', 'DESC');
+        $query = $qb->getQuery();
+        $query->setHydrationMode(Query::HYDRATE_SCALAR);
+
+        return $query;
+    }
+
 }

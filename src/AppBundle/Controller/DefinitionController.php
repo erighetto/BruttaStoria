@@ -18,12 +18,10 @@ class DefinitionController extends Controller
      */
     public function indexAction(Request $request)
     {
+
         $em = $this->getDoctrine()->getManager();
-        $qb = $em->createQueryBuilder();
-        $qb->select('d')
-            ->from('AppBundle:Definition', 'd')
-            ->orderBy('d.created', 'DESC');
-        $query = $qb->getQuery();
+        $query = $em->getRepository('AppBundle:Definition')
+            ->findAllforBackend();
 
         $paginator  = $this->get('knp_paginator');
         $pagination = $paginator->paginate(
@@ -69,7 +67,7 @@ class DefinitionController extends Controller
             $definition->setExtraInfo($purifier->purify($definition->getExtraInfo()));
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('definition_edit', array('id' => $definition->getId()));
+            return $this->redirectToRoute('definition_index');
         }
 
         return $this->render('definition/edit.html.twig', array(
