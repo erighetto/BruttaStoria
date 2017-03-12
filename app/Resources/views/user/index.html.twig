@@ -23,7 +23,7 @@
                 <td>{{ user.username }}</td>
                 <td>{{ user.name }}</td>
                 <td>{{ user.email }}</td>
-                <td>{% if user.website %}<a href="{{ user.website|raw }}" target="_blank">{{ user.website|replace({'http://': '', 'www.': ''})|striptags|slice(0, 15) ~ '...' }}{% endif %}</td>
+                <td>{% if user.website %}<a href="{{ user.website|raw }}" target="_blank">{{ user.website|replace({'http://': '', 'https://': '','www.': ''})|striptags|slice(0, 15) ~ '...' }}{% endif %}</td>
                 <td>{{ user.origin }}</td>
                 <td>{% if user.status %}Yes{% else %}No{% endif %}</td>
                 <td>
