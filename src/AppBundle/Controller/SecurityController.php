@@ -59,10 +59,9 @@ class SecurityController extends Controller
     }
 
     /**
-     * @param Request $request
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function reset_passwordAction(Request $request)
+    public function reset_passwordAction()
     {
 
         $form = $this->createFormBuilder()
