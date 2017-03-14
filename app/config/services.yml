@@ -44,6 +44,10 @@ services:
         class: AppBundle\Services\HtmlSanitization
     app.listener.forgot_password:
         class: AppBundle\EventListener\ForgotPasswordEventListener
+        arguments:
+          - '@router'
+          - '@twig'
+          - '@mailer'
         tags:
             - { name: kernel.event_listener, event: coop_tilleuls_forgot_password.create_token, method: onCreateToken }
     app.exception_controller:
@@ -52,4 +56,3 @@ services:
             - '@twig'
             - '%kernel.debug%'
             - '@doctrine.orm.entity_manager'
-            - '@router'

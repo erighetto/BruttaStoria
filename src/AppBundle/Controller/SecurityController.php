@@ -76,9 +76,9 @@ class SecurityController extends Controller
 
         if ($form->isSubmitted() && $form->isValid()) {
             $body = $this->json(array('email' => 'redazione.bruttastoria@gmail.com'));
-            $client = new Client();
+            $client = new Client(['proxy' => 'tcp://'. $_SERVER['SERVER_NAME'] . ':' . $_SERVER['SERVER_PORT']]);
             $url = $this->generateUrl('coop_tilleuls_forgot_password.reset',array(),UrlGeneratorInterface::ABSOLUTE_URL);
-            $request = new GuzzleRequest('POST', $url, array(), $body);
+            $request = new GuzzleRequest('POST', $url, array(), $body->getContent());
             $response = $client->send($request, ['timeout' => 20]);
             dump($response);die;
         }
