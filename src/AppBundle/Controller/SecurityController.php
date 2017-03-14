@@ -8,6 +8,9 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use AppBundle\Entity\User;
+use GuzzleHttp\Client;
+use GuzzleHttp\Psr7\Request as GuzzleRequest;
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 /**
  * Class SecurityController
@@ -59,16 +62,26 @@ class SecurityController extends Controller
     }
 
     /**
+     * Request $request
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function reset_passwordAction()
+    public function reset_passwordAction(Request $request)
     {
 
         $form = $this->createFormBuilder()
-            ->setAction($this->generateUrl('coop_tilleuls_forgot_password.reset'))
             ->add('email', TextType::class, array('label' => 'Email'))
             ->add('reset', SubmitType::class, array('label' => 'Reset Password', 'attr' => array('class' => 'btn btn-warning')))
             ->getForm();
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $body = $this->json(array('email' => 'redazione.bruttastoria@gmail.com'));
+            $client = new Client();
+            $url = $this->generateUrl('coop_tilleuls_forgot_password.reset',array(),UrlGeneratorInterface::ABSOLUTE_URL);
+            $request = new GuzzleRequest('POST', $url, array(), $body);
+            $response = $client->send($request, ['timeout' => 20]);
+            dump($response);die;
+        }
 
         return $this->render('security/reset.password.html.twig', array(
             'form' => $form->createView(),
