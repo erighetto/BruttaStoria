@@ -62,7 +62,7 @@ class SecurityController extends Controller
     }
 
     /**
-     * Request $request
+     * @param Request $request
      * @return \Symfony\Component\HttpFoundation\Response
      */
     public function reset_passwordAction(Request $request)
@@ -75,12 +75,19 @@ class SecurityController extends Controller
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $body = $this->json(array('email' => 'redazione.bruttastoria@gmail.com'));
+            $data = $form->getData();
+            $body = $this->json(array('email' => $data['email']));
             $client = new Client(['proxy' => 'tcp://'. $_SERVER['SERVER_NAME'] . ':' . $_SERVER['SERVER_PORT']]);
             $url = $this->generateUrl('coop_tilleuls_forgot_password.reset',array(),UrlGeneratorInterface::ABSOLUTE_URL);
             $request = new GuzzleRequest('POST', $url, array(), $body->getContent());
             $response = $client->send($request, ['timeout' => 20]);
-            dump($response);die;
+        } else {
+            $response = false;
+        }
+
+        if ($response) {
+          $message = json_decode($response->getBody(), true);
+          dump($message); die;
         }
 
         return $this->render('security/reset.password.html.twig', array(
