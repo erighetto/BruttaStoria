@@ -10,6 +10,8 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use AppBundle\Entity\User;
 use GuzzleHttp\Client;
 use GuzzleHttp\Psr7\Request as GuzzleRequest;
+use GuzzleHttp\Exception\RequestException;
+use GuzzleHttp\Psr7;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 /**
@@ -67,27 +69,34 @@ class SecurityController extends Controller
      */
     public function reset_passwordAction(Request $request)
     {
-
         $form = $this->createFormBuilder()
-            ->add('email', TextType::class, array('label' => 'Email'))
-            ->add('reset', SubmitType::class, array('label' => 'Reset Password', 'attr' => array('class' => 'btn btn-warning')))
+            ->add('email', TextType::class, ['label' => 'Email'])
+            ->add('reset', SubmitType::class, ['label' => 'Reset Password', 'attr' => ['class' => 'btn btn-warning']])
             ->getForm();
         $form->handleRequest($request);
 
+        $response = false;
+
         if ($form->isSubmitted() && $form->isValid()) {
             $data = $form->getData();
-            $body = $this->json(array('email' => $data['email']));
-            $client = new Client(['proxy' => 'tcp://'. $_SERVER['SERVER_NAME'] . ':' . $_SERVER['SERVER_PORT']]);
-            $url = $this->generateUrl('coop_tilleuls_forgot_password.reset',array(),UrlGeneratorInterface::ABSOLUTE_URL);
-            $request = new GuzzleRequest('POST', $url, array(), $body->getContent());
-            $response = $client->send($request, ['timeout' => 20]);
-        } else {
-            $response = false;
+            $body = $this->json(['email' => $data['email']]);
+            $client = new Client(['proxy' => 'tcp://' . $_SERVER['REMOTE_ADDR'] . ':' . $_SERVER['SERVER_PORT']]);
+            $url = $this->generateUrl('coop_tilleuls_forgot_password.reset', array(), UrlGeneratorInterface::ABSOLUTE_URL);
+            $request = new GuzzleRequest('POST', $url, [], $body->getContent());
+
+            try {
+                $response = $client->send($request, ['timeout' => 20]);
+            } catch (RequestException $e) {
+                if ($e->hasResponse()) {
+                    echo Psr7\str($e->getResponse());
+                }
+            }
         }
 
         if ($response) {
-          $message = json_decode($response->getBody(), true);
-          dump($message); die;
+            $message = json_decode($response->getBody(), true);
+            dump($message);
+            die;
         }
 
         return $this->render('security/reset.password.html.twig', array(
