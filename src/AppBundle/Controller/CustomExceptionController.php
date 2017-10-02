@@ -8,6 +8,7 @@ use Symfony\Component\Debug\Exception\FlattenException;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Log\DebugLoggerInterface;
 use Symfony\Component\HttpFoundation\Response;
+use Twig\Environment;
 
 /**
  * Class CustomExceptionController
@@ -22,11 +23,11 @@ class CustomExceptionController extends ExceptionController
 
     /**
      * CustomExceptionController constructor.
-     * @param \Twig_Environment $twig
+     * @param Environment $twig
      * @param $debug
      * @param EntityManager $entityManager
      */
-    public function __construct(\Twig_Environment $twig, $debug, EntityManager $entityManager)
+    public function __construct(Environment $twig, $debug, EntityManager $entityManager)
     {
         parent::__construct($twig, $debug);
         $this->entityManager = $entityManager;
