@@ -1,0 +1,24 @@
+{
+  "name": "bruttastoria.it",
+  "version": "1.0.0",
+  "description": "bruttastoria.it",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/erighetto/BruttaStoria.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "homepage": "https://github.com/erighetto/BruttaStoria#readme",
+  "dependencies": {
+    "compass-importer": "^0.4.1",
+    "gulp": "^4.0.0",
+    "gulp-autoprefixer": "^6.0.0",
+    "gulp-cssnano": "^2.1.3",
+    "gulp-sass": "^4.0.1",
+    "gulp-sass-glob": "^1.0.9",
+    "gulp-sourcemaps": "^2.6.4"
+  }
+}
