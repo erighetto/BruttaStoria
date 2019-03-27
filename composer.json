@@ -1,8 +1,12 @@
 {
-    "name": "erighetto/bruttastoria",
-    "license": "MIT",
-    "type": "project",
-    "description": "The \"Symfony Standard Edition\" distribution",
+  "name": "erighetto/bruttastoria",
+  "type": "project",
+  "authors": [
+    {
+      "name": "Emanuel Righetto",
+      "role": "Web Developer"
+    }
+  ],
     "autoload": {
         "psr-4": { "": "src/" },
         "classmap": [ "app/AppKernel.php", "app/AppCache.php" ]
