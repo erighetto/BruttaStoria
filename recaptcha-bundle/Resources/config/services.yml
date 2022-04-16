@@ -1,0 +1,17 @@
+services:
+    anysrv_recaptcha.locale:
+        class: Anysrv\RecaptchaBundle\Utils\Locale
+        public: false
+        arguments: ["%anysrv_recaptcha.overwrite_locale%", "@request_stack"]
+
+    anysrv_recaptcha.form.type:
+        class: Anysrv\RecaptchaBundle\Form\Type\AnysrvRecaptchaType
+        arguments: ["%anysrv_recaptcha.enabled%", "%anysrv_recaptcha.sitekey%", "%anysrv_recaptcha.options%", "@anysrv_recaptcha.locale"]
+        tags:
+            - { name: form.type }
+
+    anysrv_recaptcha.validator.true:
+        class: Anysrv\RecaptchaBundle\Validator\Constraints\IsTrueValidator
+        arguments: ["%anysrv_recaptcha.enabled%", "%anysrv_recaptcha.secret%", "@request_stack"]
+        tags:
+            - { name: validator.constraint_validator, alias: 'anysrv_recaptcha.true' }

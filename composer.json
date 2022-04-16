@@ -33,7 +33,7 @@
         "presta/sitemap-bundle": "^1.5",
         "stfalcon/tinymce-bundle": "2.0",
         "cocur/slugify": "^2.4",
-        "anysrv/recaptcha-bundle": "^1.0",
+        "anysrv/recaptcha-bundle": "@dev",
         "tilleuls/forgot-password-bundle": "^1.0",
         "guzzlehttp/guzzle": "^6.2"
     },
@@ -45,12 +45,7 @@
     },
     "scripts": {
         "symfony-scripts": [
-            "Incenteev\\ParameterHandler\\ScriptHandler::buildParameters",
-            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::buildBootstrap",
-            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::clearCache",
-            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installAssets",
-            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installRequirementsFile",
-            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::prepareDeploymentTarget"
+            "Incenteev\\ParameterHandler\\ScriptHandler::buildParameters"
         ],
         "post-install-cmd": [
             "@symfony-scripts"
@@ -77,5 +72,14 @@
         "branch-alias": {
             "dev-master": "3.4-dev"
         }
+    },
+  "repositories": {
+    "local": {
+      "url": "./recaptcha-bundle",
+      "type": "path",
+      "options": {
+        "symlink": true
+      }
     }
+  }
 }
