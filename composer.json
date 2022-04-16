@@ -45,7 +45,8 @@
     },
     "scripts": {
         "symfony-scripts": [
-            "Incenteev\\ParameterHandler\\ScriptHandler::buildParameters"
+            "Incenteev\\ParameterHandler\\ScriptHandler::buildParameters",
+            "@php bin/console cache:clear"
         ],
         "post-install-cmd": [
             "@symfony-scripts"
@@ -56,7 +57,7 @@
     },
     "config": {
         "platform": {
-            "php": "7.1"
+            "php": "7.4"
         }
     },
     "extra": {
